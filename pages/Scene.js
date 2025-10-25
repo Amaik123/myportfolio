@@ -74,7 +74,6 @@ export default function Scene() {
   const controlsRef = useRef(null);
   const tetrahedraRef = useRef([]);
   const ringsRef = useRef([]);
-  a;
   const [palette, setPalette] = useState(palettes[0]);
   const unitRef = useRef(0);
   const tRef = useRef(0);

@@ -7,6 +7,7 @@
 ## Prerequisites
 
 Make sure you have:
+
 - ✅ Git installed on your computer
 - ✅ A GitHub account ([Sign up here](https://github.com) if you don't have one)
 
@@ -15,11 +16,13 @@ Make sure you have:
 ## Method 1: Using GitHub Desktop (Easiest for Beginners) ⭐
 
 ### Step 1: Download GitHub Desktop
+
 1. Go to [desktop.github.com](https://desktop.github.com)
 2. Download and install GitHub Desktop
 3. Sign in with your GitHub account
 
 ### Step 2: Add Your Project
+
 1. Open GitHub Desktop
 2. Click **File** → **Add Local Repository**
 3. Navigate to: `C:\Users\Aakash\Downloads\vanta-main\vanta-main`
@@ -31,11 +34,13 @@ Make sure you have:
    - Click "Create Repository"
 
 ### Step 3: Prepare for Upload
+
 1. In GitHub Desktop, you'll see all your files listed
 2. Add a commit message: "Initial commit - Complete portfolio website"
 3. Click "Commit to main"
 
 ### Step 4: Publish to GitHub
+
 1. Click "Publish repository" button (top right)
 2. Repository name: `portfolio-website`
 3. Description: "Professional portfolio showcasing 6+ years of full-stack development expertise"
@@ -43,6 +48,7 @@ Make sure you have:
 5. Click "Publish Repository"
 
 ### Done! ✨
+
 Your code is now on GitHub at: `https://github.com/YOUR_USERNAME/portfolio-website`
 
 ---
@@ -50,9 +56,11 @@ Your code is now on GitHub at: `https://github.com/YOUR_USERNAME/portfolio-websi
 ## Method 2: Using Command Line (For Advanced Users)
 
 ### Step 1: Create .gitignore file
+
 First, make sure you have a .gitignore file to exclude unnecessary files.
 
 ### Step 2: Initialize Git and Commit
+
 Open PowerShell and run:
 
 ```powershell
@@ -73,6 +81,7 @@ git branch -M main
 ```
 
 ### Step 3: Create Repository on GitHub
+
 1. Go to [github.com](https://github.com)
 2. Click the **+** icon (top right) → **New repository**
 3. Repository name: `portfolio-website`
@@ -82,6 +91,7 @@ git branch -M main
 7. Click **Create repository**
 
 ### Step 4: Push to GitHub
+
 GitHub will show you commands. Copy them and run in PowerShell:
 
 ```powershell
@@ -93,10 +103,12 @@ git push -u origin main
 ```
 
 **If you get authentication error:**
+
 - GitHub now requires Personal Access Token instead of password
 - See "Creating a Personal Access Token" section below
 
 ### Done! ✨
+
 Visit: `https://github.com/YOUR_USERNAME/portfolio-website`
 
 ---
@@ -121,6 +133,7 @@ If you get authentication errors:
 ## What Files Will Be Uploaded?
 
 Your repository will include:
+
 - ✅ All source code files
 - ✅ package.json and dependencies
 - ✅ Public assets (images, logos)
@@ -133,6 +146,7 @@ Your repository will include:
 ## After Pushing to GitHub
 
 ### Option 1: Deploy to Vercel
+
 1. Go to [vercel.com](https://vercel.com)
 2. Sign in with GitHub
 3. Click "New Project"
@@ -141,6 +155,7 @@ Your repository will include:
 6. Done! Your site will be live in 2-3 minutes ✨
 
 ### Option 2: Deploy to Netlify
+
 1. Go to [netlify.com](https://netlify.com)
 2. Sign in with GitHub
 3. Click "Add new site" → "Import an existing project"
@@ -155,6 +170,7 @@ Your repository will include:
 Once your code is on GitHub:
 
 ### Using GitHub Desktop:
+
 1. Make changes to your files
 2. Open GitHub Desktop
 3. It will show all changes
@@ -163,6 +179,7 @@ Once your code is on GitHub:
 6. Click "Push origin"
 
 ### Using Command Line:
+
 ```powershell
 git add .
 git commit -m "Your commit message"
@@ -185,16 +202,20 @@ git push
 ## Troubleshooting
 
 **Problem: "Git is not recognized"**
+
 - Solution: Install Git from [git-scm.com](https://git-scm.com)
 
 **Problem: "Authentication failed"**
+
 - Solution: Use Personal Access Token instead of password
 - See "Creating a Personal Access Token" section above
 
 **Problem: "Repository already exists"**
+
 - Solution: Either delete the existing repo on GitHub, or use a different name
 
 **Problem: "Large files warning"**
+
 - Solution: Make sure node_modules is in .gitignore
 - Run: `git rm -r --cached node_modules`
 
@@ -210,6 +231,7 @@ git push
 ## What's Next?
 
 After pushing to GitHub:
+
 1. ✅ Your code is safely backed up
 2. ✅ You can deploy to Vercel/Netlify
 3. ✅ You can share the repository link

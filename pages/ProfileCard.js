@@ -39,7 +39,7 @@ const ProfileCardComponent = ({
   name = "Aakash K.",
   title = "Certified AI & Cloud Solutions Architect",
   handle = "aakashk",
-  status = "Available for Hire",
+  status = "Working in Emtec Currently",
   contactText = "Contact",
   showUserInfo = true,
   onContactClick,

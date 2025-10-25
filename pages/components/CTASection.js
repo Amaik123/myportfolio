@@ -65,7 +65,8 @@ export default function CTASection() {
             </defs>
             <text className={styles.circleText}>
               <textPath href="#circlePath" startOffset="0%">
-                AVAILABLE FOR HIRE • AVAILABLE FOR HIRE • AVAILABLE FOR HIRE •
+                WORKING IN EMTEC CURRENTLY • WORKING IN EMTEC CURRENTLY •
+                WORKING IN EMTEC CURRENTLY •
               </textPath>
             </text>
           </svg>

@@ -200,9 +200,7 @@ export default function AboutPage() {
                   Senior Software Engineer at Emtec Inc. - Delivering enterprise
                   solutions.
                 </span>
-                <span>
-                  Based in India - Available for hire on exciting projects.
-                </span>
+                <span>Based in India - Working in Emtec Currently.</span>
               </motion.div>
             </div>
 

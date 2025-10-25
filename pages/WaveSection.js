@@ -219,7 +219,7 @@ export default function ThreeDCard() {
             name="Aakash K."
             title="Certified AI & Cloud Solutions Architect"
             handle="aakash"
-            status="Available for Hire"
+            status="Working in Emtec Currently"
             contactText="Contact Me"
             avatarUrl="/mypic.png"
             showUserInfo={true}

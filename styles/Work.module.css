@@ -12,8 +12,8 @@
   position: fixed !important;
   top: 0;
   left: 0;
-  width: 100vw !important;
-  height: 100vh !important;
+  width: 100% !important;
+  height: 100% !important;
   z-index: 0;
   pointer-events: none;
   opacity: 0.3;
@@ -368,6 +368,35 @@
   }
   50% {
     transform: translateY(-15px);
+  }
+}
+
+/* Disable float animation on mobile */
+@media (max-width: 768px) {
+  .ctaIcon {
+    animation: none;
+  }
+
+  .projectCard {
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .projectCard:hover {
+    transform: translateY(-4px);
+  }
+
+  .projectImage {
+    transition: transform 0.3s ease;
+  }
+
+  .projectCard:hover .projectImage {
+    transform: scale(1.02);
+  }
+
+  .projectInfo {
+    transition: all 0.2s ease;
   }
 }
 

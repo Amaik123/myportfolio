@@ -358,6 +358,24 @@
   .copyright {
     justify-content: center;
   }
+
+  /* Disable heavy animations on mobile */
+  .footerOrb {
+    animation: none !important;
+    opacity: 0.2;
+  }
+
+  .brandSection::before {
+    animation: none !important;
+  }
+
+  .footerLink {
+    transition: color 0.2s ease;
+  }
+
+  .footerLink:hover {
+    transform: none;
+  }
 }
 
 @media (max-width: 480px) {

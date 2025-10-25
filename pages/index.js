@@ -20,6 +20,7 @@ export default function Home() {
         width: "100%",
         margin: 0,
         padding: 0,
+        maxWidth: "100%",
       }}
     >
       <Particles
@@ -95,6 +96,7 @@ export default function Home() {
           minHeight: "100vh",
           position: "relative",
           width: "100%",
+          maxWidth: "100%",
         }}
       >
         <NavBar />

@@ -1,0 +1,1494 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0a0a12 0%, #0f0f1e 50%, #0a0a12 100%);
+  position: relative;
+  overflow-x: clip;
+}
+
+/* Particles */
+.particlesContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  background: linear-gradient(135deg, #a855f7, #ec4899);
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  padding: 100px 24px 60px;
+  text-align: center;
+  overflow: hidden;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 900px;
+  height: 600px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(168, 85, 247, 0.15) 0%,
+    rgba(236, 72, 153, 0.08) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heroLabel {
+  display: block;
+  padding: 8px 20px;
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #a855f7;
+  margin-bottom: 24px;
+  width: fit-content;
+}
+
+.heroTitle {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 20px 0;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.heroHighlight {
+  background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline;
+}
+
+.heroSubtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.7;
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+/* Pointer to avatar */
+.avatarPointer {
+  margin-top: 30px;
+  padding: 12px 24px;
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 50px;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  animation: pointBounce 2s ease-in-out infinite;
+}
+
+@keyframes pointBounce {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+
+/* Character Container */
+.characterWrapper {
+  margin-top: 30px;
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  justify-content: center;
+}
+
+.characterContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+/* 3D Avatar Container */
+.avatar3DContainer {
+  width: 100%;
+  height: 500px;
+  cursor: grab;
+  border-radius: 20px;
+  overflow: hidden;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(168, 85, 247, 0.1) 0%,
+    transparent 70%
+  );
+  position: relative;
+}
+
+.avatar3DContainer:active {
+  cursor: grabbing;
+}
+
+.avatar3DContainer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.avatar3DContainer::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 100px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(168, 85, 247, 0.3) 0%,
+    transparent 70%
+  );
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+/* Interaction Hints */
+.interactionHints {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.interactionHints p {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+/* Legacy SVG styles - keeping for fallback */
+.characterSvg {
+  width: 180px;
+  height: 220px;
+  cursor: pointer;
+  filter: drop-shadow(0 10px 30px rgba(168, 85, 247, 0.3));
+  transition: filter 0.3s ease;
+}
+
+.characterSvg:hover {
+  filter: drop-shadow(0 15px 40px rgba(168, 85, 247, 0.5));
+}
+
+.clickHint {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Speech Bubble */
+.speechBubble {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  background: rgba(15, 15, 25, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(168, 85, 247, 0.5);
+  border-radius: 24px;
+  padding: 18px 28px;
+  max-width: 380px;
+  min-width: 240px;
+  box-shadow:
+    0 15px 50px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(168, 85, 247, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.speechBubble p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #fff;
+  line-height: 1.6;
+}
+
+.typingCursor {
+  animation: blink 0.8s step-end infinite;
+  color: #a855f7;
+  font-weight: bold;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.bubbleTail {
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 12px solid rgba(20, 20, 35, 0.95);
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.3));
+}
+
+/* Timeline Section */
+.timelineSection {
+  position: relative;
+  padding: 60px 24px 100px;
+  z-index: 1;
+}
+
+.timelineLine {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(168, 85, 247, 0.5) 10%,
+    rgba(236, 72, 153, 0.5) 50%,
+    rgba(245, 158, 11, 0.5) 90%,
+    transparent 100%
+  );
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.timelineContainer {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Timeline Event */
+.timelineEvent {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 60px;
+  position: relative;
+  width: 50%;
+  padding: 0 40px;
+}
+
+.timelineEvent.left {
+  justify-content: flex-end;
+  padding-right: 60px;
+  text-align: right;
+}
+
+.timelineEvent.right {
+  margin-left: 50%;
+  padding-left: 60px;
+}
+
+.eventDot {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(
+    135deg,
+    var(--event-color),
+    rgba(255, 255, 255, 0.1)
+  );
+  border: 3px solid var(--event-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 0 20px var(--event-color);
+  transition: all 0.3s ease;
+}
+
+.timelineEvent.left .eventDot {
+  right: -25px;
+}
+
+.timelineEvent.right .eventDot {
+  left: -25px;
+}
+
+.timelineEvent:hover .eventDot {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px var(--event-color);
+}
+
+.timelineEvent.active .eventDot {
+  transform: scale(1.2);
+  box-shadow: 0 0 40px var(--event-color);
+}
+
+.eventIcon {
+  font-size: 1.3rem;
+}
+
+.eventCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  max-width: 400px;
+}
+
+.eventCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--event-color);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.eventCard:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.eventCard:hover::before,
+.timelineEvent.active .eventCard::before {
+  opacity: 1;
+}
+
+.eventYear {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--event-color);
+  margin-bottom: 12px;
+}
+
+.eventTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 8px;
+}
+
+.eventDescription {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.eventDetails {
+  overflow: hidden;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.eventDetails p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+
+.achievementsList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+}
+
+.achievementsList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 8px;
+}
+
+.timelineEvent.left .achievementsList li {
+  justify-content: flex-end;
+}
+
+.achievementIcon {
+  color: #a855f7;
+  flex-shrink: 0;
+}
+
+.skillTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.timelineEvent.left .skillTags {
+  justify-content: flex-end;
+}
+
+.skillTag {
+  padding: 4px 12px;
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 50px;
+  font-size: 0.75rem;
+  color: #a855f7;
+}
+
+.expandHint {
+  display: block;
+  margin-top: 12px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Timeline End */
+.timelineEnd {
+  text-align: center;
+  padding: 40px;
+}
+
+.endIcon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 16px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.timelineEnd p {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+  margin: 0;
+}
+
+/* Stats Section */
+.statsSection {
+  padding: 40px 24px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.statsGrid {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.statCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.statCard:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-5px);
+}
+
+.statEmoji {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.statValue {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #a855f7, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.statTitle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* CTA Section */
+.ctaSection {
+  padding: 0 24px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+.ctaContent {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 50px;
+  background: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 0.1) 0%,
+    rgba(236, 72, 153, 0.1) 50%,
+    rgba(245, 158, 11, 0.1) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+}
+
+.ctaTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 12px;
+}
+
+.ctaSubtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 30px;
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ctaBtn {
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+  border: none;
+  border-radius: 50px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ctaBtn:hover {
+  box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+}
+
+.ctaBtn.secondary {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.ctaBtn.secondary:hover {
+  border-color: #a855f7;
+  box-shadow: 0 10px 30px rgba(168, 85, 247, 0.2);
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .hero {
+    padding-right: 250px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    padding-right: 24px; /* Remove extra padding on mobile */
+  }
+
+  .timelineLine {
+    left: 30px;
+  }
+
+  .timelineEvent {
+    width: 100%;
+    padding-left: 80px !important;
+    padding-right: 20px !important;
+    text-align: left !important;
+  }
+
+  .timelineEvent.left,
+  .timelineEvent.right {
+    margin-left: 0;
+    justify-content: flex-start;
+  }
+
+  .timelineEvent.left .eventDot,
+  .timelineEvent.right .eventDot {
+    left: 5px;
+    right: auto;
+  }
+
+  .timelineEvent.left .achievementsList li,
+  .timelineEvent.left .skillTags {
+    justify-content: flex-start;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .avatar3DContainer {
+    height: 350px;
+  }
+
+  .interactionHints p {
+    font-size: 0.75rem;
+  }
+
+  .characterSvg {
+    width: 140px;
+    height: 170px;
+  }
+
+  .speechBubble {
+    max-width: 280px;
+    padding: 12px 16px;
+    top: -5px;
+  }
+
+  .speechBubble p {
+    font-size: 0.85rem;
+  }
+
+  .eventCard {
+    padding: 18px;
+  }
+
+  .eventTitle {
+    font-size: 1.1rem;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .statCard {
+    padding: 16px;
+  }
+
+  .statValue {
+    font-size: 1.8rem;
+  }
+
+  .ctaContent {
+    padding: 30px 20px;
+  }
+
+  .ctaTitle {
+    font-size: 1.4rem;
+  }
+
+  .ctaButtons {
+    flex-direction: column;
+  }
+
+  .ctaBtn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .avatar3DContainer {
+    height: 300px;
+  }
+
+  .heroTitle {
+    font-size: 2rem;
+  }
+
+  .timelineEvent {
+    padding-left: 60px !important;
+  }
+
+  .eventDot {
+    width: 40px;
+    height: 40px;
+  }
+
+  .eventIcon {
+    font-size: 1rem;
+  }
+}
+
+/* ========================================
+   STICKY AVATAR COMPANION STYLES
+   ======================================== */
+
+.stickyAvatarWrapper {
+  position: fixed;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+}
+
+.stickyAvatarWrapper.minimized {
+  right: 15px;
+}
+
+.stickyAvatarCanvas {
+  width: 320px;
+  height: 480px;
+  border-radius: 24px;
+  overflow: visible;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 15, 30, 0.9) 0%,
+    rgba(20, 10, 35, 0.95) 100%
+  );
+  border: 3px solid rgba(168, 85, 247, 0.5);
+  cursor: pointer;
+  position: relative;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(168, 85, 247, 0.25),
+    inset 0 0 40px rgba(168, 85, 247, 0.08);
+  transition: all 0.3s ease;
+}
+
+.stickyAvatarCanvas:hover {
+  border-color: rgba(168, 85, 247, 0.8);
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.45),
+    0 0 40px rgba(168, 85, 247, 0.35),
+    inset 0 0 30px rgba(168, 85, 247, 0.1);
+  transform: translateY(-5px);
+}
+
+.stickyAvatarCanvas:active {
+  cursor: pointer;
+}
+
+/* Toggle button */
+.avatarToggleBtn {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(15, 15, 30, 0.95);
+  border: 2px solid rgba(168, 85, 247, 0.5);
+  color: #fff;
+  font-size: 0.85rem;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease;
+}
+
+.avatarToggleBtn:hover {
+  background: rgba(168, 85, 247, 0.3);
+  border-color: #a855f7;
+  transform: scale(1.1);
+}
+
+/* Sticky speech bubble - appears to the left */
+.stickyBubble {
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 15px;
+  background: rgba(15, 15, 25, 0.98);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(168, 85, 247, 0.5);
+  border-radius: 20px;
+  padding: 14px 20px;
+  max-width: 260px;
+  min-width: 180px;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(168, 85, 247, 0.2);
+}
+
+.stickyBubble p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #fff;
+  line-height: 1.5;
+}
+
+.stickyBubbleTail {
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid rgba(20, 20, 35, 0.98);
+}
+
+/* Avatar hints */
+.avatarHints {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.avatarHints span {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 12px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+/* Scroll progress on avatar */
+.avatarScrollProgress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #a855f7 0%, #ec4899 50%, #f59e0b 100%);
+  border-radius: 0 0 0 24px;
+  transform-origin: bottom;
+  z-index: 5;
+}
+
+/* Avatar pointer in hero */
+.avatarPointer {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  animation: pointRight 1.5s ease-in-out infinite;
+}
+
+@keyframes pointRight {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+
+/* Responsive - Sticky Avatar */
+
+/* Large tablets and small laptops */
+@media (max-width: 1200px) {
+  .stickyAvatarWrapper {
+    right: 15px;
+  }
+
+  .stickyAvatarCanvas {
+    width: 280px;
+    height: 420px;
+  }
+
+  .stickyBubble {
+    max-width: 220px;
+    min-width: 160px;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+/* iPad Pro and tablets */
+@media (max-width: 1024px) {
+  .hero {
+    padding: 100px 24px 60px;
+  }
+
+  .stickyAvatarWrapper {
+    right: 12px;
+  }
+
+  .stickyAvatarCanvas {
+    width: 240px;
+    height: 360px;
+    border-radius: 20px;
+  }
+
+  .stickyBubble {
+    max-width: 200px;
+    min-width: 150px;
+    padding: 12px 14px;
+  }
+
+  .stickyBubble p {
+    font-size: 0.9rem;
+  }
+}
+
+/* iPad and smaller tablets */
+@media (max-width: 900px) {
+  .hero {
+    padding: 100px 24px 60px;
+    min-height: auto;
+  }
+
+  /* Move avatar to bottom corner on tablets */
+  .stickyAvatarWrapper {
+    right: 15px;
+    bottom: 25px;
+    top: auto;
+    transform: none;
+  }
+
+  .stickyAvatarCanvas {
+    width: 200px;
+    height: 280px;
+    border-radius: 18px;
+  }
+
+  .avatarGlowRing {
+    border-radius: 20px;
+  }
+
+  /* Bubble goes above avatar on mobile/tablet */
+  .stickyBubble {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 100%;
+    top: auto;
+    margin-bottom: 10px;
+    margin-right: 0;
+    max-width: 200px;
+    min-width: 140px;
+    padding: 10px 14px;
+    border-radius: 16px;
+  }
+
+  .stickyBubble p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .stickyBubbleTail {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    top: auto;
+    bottom: -10px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid rgba(20, 20, 35, 0.98);
+    border-bottom: none;
+  }
+
+  .avatarPointer {
+    display: none;
+  }
+
+  /* Stats responsive */
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  /* Timeline responsive */
+  .timelineLine {
+    left: 30px;
+  }
+
+  .timelineEvent {
+    width: 100%;
+    padding-left: 80px !important;
+    padding-right: 20px !important;
+    text-align: left !important;
+  }
+
+  .timelineEvent.left,
+  .timelineEvent.right {
+    margin-left: 0;
+    justify-content: flex-start;
+  }
+
+  .timelineEvent.left .eventDot,
+  .timelineEvent.right .eventDot {
+    left: 5px;
+    right: auto;
+  }
+
+  .timelineEvent.left .achievementsList li,
+  .timelineEvent.left .skillTags {
+    justify-content: flex-start;
+  }
+}
+
+/* Small tablets and large phones */
+@media (max-width: 768px) {
+  .hero {
+    padding: 90px 20px 50px;
+  }
+
+  .heroTitle {
+    font-size: clamp(1.8rem, 7vw, 2.5rem);
+  }
+
+  .heroSubtitle {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+
+  .heroLabel {
+    font-size: 0.75rem;
+    padding: 6px 16px;
+  }
+
+  .stickyAvatarWrapper {
+    right: 10px;
+    bottom: 20px;
+  }
+
+  .stickyAvatarCanvas {
+    width: 160px;
+    height: 220px;
+    border-radius: 16px;
+    border-width: 2px;
+  }
+
+  .avatarToggleBtn {
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
+    top: -8px;
+    right: -8px;
+  }
+
+  .stickyBubble {
+    max-width: 180px;
+    min-width: 130px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    border-radius: 14px;
+  }
+
+  .stickyBubble p {
+    font-size: 0.82rem;
+  }
+
+  /* CTA responsive */
+  .ctaContent {
+    padding: 30px 20px;
+    border-radius: 20px;
+  }
+
+  .ctaTitle {
+    font-size: 1.4rem;
+  }
+
+  .ctaSubtitle {
+    font-size: 0.9rem;
+  }
+
+  .ctaButtons {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ctaBtn {
+    width: 100%;
+    padding: 12px 24px;
+  }
+
+  /* Event cards */
+  .eventCard {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .eventTitle {
+    font-size: 1.1rem;
+  }
+
+  .eventDescription {
+    font-size: 0.9rem;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 600px) {
+  .hero {
+    padding: 80px 16px 40px;
+  }
+
+  .heroContent {
+    padding: 0;
+  }
+
+  .heroTitle {
+    font-size: 1.75rem;
+  }
+
+  .heroSubtitle {
+    font-size: 0.95rem;
+  }
+
+  .avatar3DContainer {
+    height: 280px;
+    border-radius: 16px;
+  }
+
+  .interactionHints p {
+    font-size: 0.7rem;
+  }
+
+  .characterSvg {
+    width: 120px;
+    height: 150px;
+  }
+
+  .speechBubble {
+    max-width: 240px;
+    padding: 10px 14px;
+    top: -5px;
+    border-radius: 16px;
+  }
+
+  .speechBubble p {
+    font-size: 0.82rem;
+  }
+
+  /* Sticky avatar - larger on mobile */
+  .stickyAvatarWrapper {
+    right: 10px;
+    bottom: 80px;
+  }
+
+  .stickyAvatarCanvas {
+    width: 140px;
+    height: 190px;
+    border-radius: 14px;
+  }
+
+  .avatarToggleBtn {
+    width: 26px;
+    height: 26px;
+    font-size: 0.7rem;
+    top: -6px;
+    right: -6px;
+  }
+
+  .sectionIndicator {
+    width: 24px;
+    height: 24px;
+    font-size: 0.8rem;
+    top: 5px;
+    left: 5px;
+  }
+
+  .avatarHints {
+    display: none;
+  }
+
+  .stickyBubble {
+    max-width: 160px;
+    min-width: 110px;
+    padding: 8px 12px;
+    border-radius: 12px;
+  }
+
+  .stickyBubble p {
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  /* Stats grid on mobile */
+  .statsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .statCard {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .statValue {
+    font-size: 1.6rem;
+  }
+
+  .statEmoji {
+    font-size: 1.5rem;
+  }
+
+  .statTitle {
+    font-size: 0.8rem;
+  }
+
+  /* Timeline mobile */
+  .timelineSection {
+    padding: 40px 16px 60px;
+  }
+
+  .timelineEvent {
+    margin-bottom: 40px;
+    padding-left: 65px !important;
+    padding-right: 12px !important;
+  }
+
+  .eventDot {
+    width: 40px;
+    height: 40px;
+  }
+
+  .eventIcon {
+    font-size: 1rem;
+  }
+
+  .eventCard {
+    padding: 14px;
+  }
+
+  .eventYear {
+    font-size: 0.7rem;
+    padding: 3px 10px;
+  }
+
+  .eventTitle {
+    font-size: 1rem;
+  }
+
+  .eventDescription {
+    font-size: 0.85rem;
+  }
+
+  .skillTag {
+    font-size: 0.68rem;
+    padding: 3px 8px;
+  }
+
+  /* CTA section mobile */
+  .ctaSection {
+    padding: 0 16px 60px;
+  }
+
+  .ctaContent {
+    padding: 24px 16px;
+    border-radius: 16px;
+  }
+
+  .ctaTitle {
+    font-size: 1.25rem;
+  }
+
+  .ctaSubtitle {
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+  }
+
+  .ctaBtn {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 400px) {
+  .hero {
+    padding: 70px 12px 30px;
+  }
+
+  .heroTitle {
+    font-size: 1.5rem;
+  }
+
+  .heroSubtitle {
+    font-size: 0.88rem;
+  }
+
+  .heroLabel {
+    font-size: 0.7rem;
+    padding: 5px 12px;
+  }
+
+  .avatar3DContainer {
+    height: 240px;
+  }
+
+  .stickyAvatarWrapper {
+    right: 8px;
+    bottom: 70px;
+  }
+
+  .stickyAvatarCanvas {
+    width: 120px;
+    height: 160px;
+    border-radius: 12px;
+  }
+
+  .avatarToggleBtn {
+    width: 24px;
+    height: 24px;
+    font-size: 0.65rem;
+  }
+
+  .stickyBubble {
+    max-width: 130px;
+    min-width: 90px;
+    padding: 5px 8px;
+  }
+
+  .stickyBubble p {
+    font-size: 0.68rem;
+  }
+
+  .timelineEvent {
+    padding-left: 55px !important;
+  }
+
+  .eventDot {
+    width: 35px;
+    height: 35px;
+  }
+
+  .eventIcon {
+    font-size: 0.9rem;
+  }
+
+  .statsGrid {
+    gap: 8px;
+  }
+
+  .statCard {
+    padding: 12px;
+  }
+
+  .statValue {
+    font-size: 1.4rem;
+  }
+}
+
+/* Landscape mode on phones */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    min-height: auto;
+    padding: 60px 20px 40px;
+  }
+
+  .stickyAvatarWrapper {
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .stickyAvatarCanvas {
+    width: 80px;
+    height: 100px;
+  }
+
+  .stickyBubble {
+    display: none;
+  }
+}
+
+/* iPad Pro in portrait */
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: portrait) {
+  .hero {
+    padding-right: 200px;
+  }
+
+  .stickyAvatarCanvas {
+    width: 180px;
+    height: 240px;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .stickyAvatarCanvas {
+    /* Larger touch target on touch devices */
+    min-width: 100px;
+    min-height: 130px;
+  }
+
+  .avatarToggleBtn {
+    /* Larger touch target for toggle button */
+    min-width: 32px;
+    min-height: 32px;
+  }
+
+  .eventCard:hover {
+    /* Disable hover effects on touch */
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .eventCard:active {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+}

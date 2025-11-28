@@ -1,0 +1,231 @@
+/* Achievement notification */
+.achievement {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  background: linear-gradient(
+    135deg,
+    rgba(30, 30, 40, 0.95) 0%,
+    rgba(20, 20, 30, 0.95) 100%
+  );
+  border: 1px solid rgba(168, 85, 247, 0.5);
+  border-radius: 16px;
+  box-shadow:
+    0 10px 40px rgba(168, 85, 247, 0.3),
+    0 0 60px rgba(168, 85, 247, 0.2);
+  backdrop-filter: blur(20px);
+  z-index: 10000;
+  overflow: hidden;
+}
+
+.achievementIcon {
+  font-size: 2rem;
+  animation: bounce 0.5s ease infinite alternate;
+}
+
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-5px);
+  }
+}
+
+.achievementContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.achievementTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.achievementDesc {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.achievementProgress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #a855f7 0%, #ec4899 100%);
+  transform-origin: left;
+}
+
+/* Confetti */
+.confetti {
+  position: fixed;
+  top: -20px;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  z-index: 9999;
+  pointer-events: none;
+  animation: confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Matrix rain */
+.matrixColumn {
+  position: fixed;
+  top: 0;
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  color: #00ff00;
+  text-shadow: 0 0 10px #00ff00;
+  line-height: 1.2;
+  z-index: 9998;
+  pointer-events: none;
+  animation: matrixRain 5s linear forwards;
+  white-space: nowrap;
+}
+
+@keyframes matrixRain {
+  0% {
+    transform: translateY(-100%);
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+/* Disco lights */
+.discoLights {
+  position: fixed;
+  inset: 0;
+  z-index: 9997;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(168, 85, 247, 0.3) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(236, 72, 153, 0.3) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(6, 182, 212, 0.2) 0%,
+      transparent 50%
+    );
+  animation: discoRotate 2s linear infinite;
+}
+
+@keyframes discoRotate {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* Dev panel */
+.devPanel {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 200px;
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid #22c55e;
+  border-radius: 12px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  color: #22c55e;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.devHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(34, 197, 94, 0.1);
+  border-bottom: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.devHeader button {
+  background: none;
+  border: none;
+  color: #22c55e;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.devContent {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Secret hint */
+.secretHint {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  background: rgba(30, 30, 40, 0.9);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 50px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  z-index: 1000;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .achievement {
+    left: 16px;
+    right: 16px;
+    transform: none;
+  }
+
+  .devPanel {
+    bottom: 80px;
+    right: 16px;
+  }
+}

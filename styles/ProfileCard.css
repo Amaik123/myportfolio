@@ -33,6 +33,9 @@
   transform: translate3d(0, 0, 0.1px);
   position: relative;
   touch-action: none;
+  border-radius: calc(var(--card-radius) + 16px);
+  isolation: isolate;
+  filter: drop-shadow(0 18px 55px rgba(0, 0, 0, 0.55));
 }
 
 .pc-card-wrapper::before {
@@ -49,6 +52,46 @@
   background-image: var(--behind-gradient);
 }
 
+.pc-card-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: -16px;
+  border-radius: inherit;
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(168, 85, 247, 0.4),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 80% 10%,
+      rgba(236, 72, 153, 0.3),
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 50% 80%,
+      rgba(14, 165, 233, 0.25),
+      transparent 55%
+    );
+  opacity: 0.6;
+  z-index: -1;
+  filter: blur(32px);
+  pointer-events: none;
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}
+
 .pc-card-wrapper:hover,
 .pc-card-wrapper.active {
   --card-opacity: 1;
@@ -61,12 +104,14 @@
 }
 
 .pc-card {
-  height: 80svh;
+  width: clamp(340px, 42vw, 440px);
+  height: clamp(560px, 76svh, 720px);
   max-height: 800px;
   display: grid;
   aspect-ratio: 0.718;
   border-radius: var(--card-radius);
   position: relative;
+  background-color: #0c0c18;
   background-blend-mode: color-dodge, normal, normal, normal;
   animation: glow-bg 12s linear infinite;
   box-shadow:
@@ -76,10 +121,11 @@
     0 0 50px rgba(168, 85, 247, 0.08),
     inset 0 0 30px rgba(139, 92, 246, 0.05);
   transition:
-    transform 1s ease,
-    box-shadow 0.6s ease,
-    border 0.3s ease;
+    transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 0.3s ease-out,
+    border 0.2s ease-out;
   transform: translate3d(0, 0, 0.1px) rotateX(0deg) rotateY(0deg);
+  will-change: transform;
   background-size: 100% 100%;
   background-position:
     0 0,
@@ -104,7 +150,23 @@
       #c137ffff 100%
     );
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  isolation: isolate;
+}
+
+.pc-card::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: calc(var(--card-radius) - 10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 0 0 1px rgba(168, 85, 247, 0.15),
+    0 20px 60px rgba(0, 0, 0, 0.45),
+    inset 0 0 40px rgba(139, 92, 246, 0.08);
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.9;
 }
 
 .pc-card:hover {
@@ -119,7 +181,7 @@
 
 .pc-card:hover,
 .pc-card.active {
-  transition: none;
+  transition: transform 0.05s linear;
   transform: translate3d(0, 0, 0.1px) rotateX(var(--rotate-y))
     rotateY(var(--rotate-x));
 }
@@ -312,6 +374,19 @@
   inset: 0;
   z-index: 1;
   backdrop-filter: blur(35px) saturate(150%);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(12, 10, 26, 0) 0%,
+      rgba(12, 10, 26, 0.3) 55%,
+      rgba(12, 10, 26, 0.85) 100%
+    ),
+    radial-gradient(
+      120% 140% at 50% 90%,
+      rgba(124, 58, 237, 0.12),
+      transparent 55%
+    );
+  mix-blend-mode: soft-light;
   mask: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0) 0%,
@@ -332,21 +407,52 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.12) 0%,
-    rgba(255, 255, 255, 0.05) 100%
-  );
+  gap: 14px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(15, 18, 40, 0.92) 0%,
+      rgba(25, 16, 50, 0.78) 60%,
+      rgba(52, 0, 128, 0.55) 100%
+    ),
+    linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
   backdrop-filter: blur(40px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 18px;
   padding: 16px 20px;
   pointer-events: auto;
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    0 10px 38px rgba(0, 0, 0, 0.35),
+    0 0 32px rgba(109, 40, 217, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.25);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pc-user-info::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(
+      120% 80% at 20% 50%,
+      rgba(79, 70, 229, 0.25),
+      transparent 55%
+    ),
+    radial-gradient(
+      140% 120% at 80% 50%,
+      rgba(236, 72, 153, 0.2),
+      transparent 60%
+    );
+  filter: blur(18px);
+  opacity: 0.8;
+  z-index: -1;
+  pointer-events: none;
 }
 
 .pc-user-info:hover {
@@ -359,6 +465,7 @@
   transform: translateY(-2px);
   box-shadow:
     0 12px 48px rgba(0, 0, 0, 0.4),
+    0 0 38px rgba(109, 40, 217, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.3),
     inset 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
@@ -451,10 +558,10 @@
 .pc-contact-btn {
   background: linear-gradient(
     135deg,
-    rgba(139, 92, 246, 0.9) 0%,
-    rgba(168, 85, 247, 0.9) 100%
+    rgba(126, 34, 206, 0.95) 0%,
+    rgba(236, 72, 153, 0.95) 100%
   );
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 10px;
   padding: 10px 20px;
   font-size: 14px;
@@ -485,6 +592,25 @@
   transition: opacity 0.3s ease;
 }
 
+.pc-contact-btn::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -30%;
+  width: 40%;
+  height: 220%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.35),
+    transparent 70%
+  );
+  transform: translateX(-120%) rotate(-18deg);
+  transition:
+    transform 0.6s ease,
+    opacity 0.6s ease;
+  opacity: 0;
+}
+
 .pc-contact-btn:hover {
   background: linear-gradient(
     135deg,
@@ -500,6 +626,11 @@
 
 .pc-contact-btn:hover::before {
   opacity: 1;
+}
+
+.pc-contact-btn:hover::after {
+  opacity: 1;
+  transform: translateX(260%) rotate(-18deg);
 }
 
 .pc-contact-btn:active {
@@ -599,8 +730,9 @@
 
 @media (max-width: 768px) {
   .pc-card {
-    height: 70svh;
-    max-height: 500px;
+    width: min(92vw, 360px);
+    height: clamp(480px, 72svh, 560px);
+    max-height: 540px;
     aspect-ratio: 0.718;
   }
 
@@ -679,8 +811,9 @@
 
 @media (max-width: 480px) {
   .pc-card {
-    height: 65svh;
-    max-height: 450px;
+    width: min(94vw, 330px);
+    height: clamp(440px, 68svh, 520px);
+    max-height: 500px;
     aspect-ratio: 0.718;
   }
 
@@ -745,8 +878,9 @@
 
 @media (max-width: 320px) {
   .pc-card {
-    height: 60svh;
-    max-height: 380px;
+    width: 94vw;
+    height: clamp(400px, 64svh, 480px);
+    max-height: 460px;
   }
 
   .pc-details {

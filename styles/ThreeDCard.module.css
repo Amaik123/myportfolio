@@ -131,17 +131,36 @@
   color: rgb(255, 255, 255);
   margin: 0;
   line-height: 1.2;
-  letter-spacing: -0.01em;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+  letter-spacing: -0.02em;
+  text-shadow:
+    0 0 40px rgba(168, 85, 247, 0.3),
+    0 2px 12px rgba(0, 0, 0, 0.5);
   position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0.2em;
+  animation: titleGlow 4s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+  0%,
+  100% {
+    text-shadow:
+      0 0 40px rgba(168, 85, 247, 0.3),
+      0 2px 12px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    text-shadow:
+      0 0 60px rgba(168, 85, 247, 0.5),
+      0 0 80px rgba(236, 72, 153, 0.3),
+      0 2px 12px rgba(0, 0, 0, 0.5);
+  }
 }
 
 .fontsubText {
-  background: linear-gradient(120deg, #a855f7 0%, #ec4899 50%, #f59e0b 100%);
+  background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #f59e0b 100%);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -149,9 +168,34 @@
   display: inline;
   text-shadow: none;
   position: relative;
-  filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.4));
-  font-weight: 700;
+  filter: drop-shadow(0 0 40px rgba(168, 85, 247, 0.6));
+  font-weight: 800;
   white-space: nowrap;
+  animation:
+    gradientShift 3s ease-in-out infinite,
+    gradientMove 6s linear infinite;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 40px rgba(168, 85, 247, 0.6));
+  }
+  50% {
+    filter: drop-shadow(0 0 60px rgba(236, 72, 153, 0.9));
+  }
 }
 
 .textContainer {
@@ -202,6 +246,9 @@
   pointer-events: none;
   z-index: 1;
   overflow: hidden;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 10px 34px rgba(0, 0, 0, 0.35));
+  isolation: isolate;
 }
 
 .techIcon {
@@ -209,9 +256,16 @@
   width: 50px;
   height: 50px;
   border-radius: 12px;
-  background: rgba(20, 20, 35, 0.8);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(145deg, rgba(20, 24, 45, 0.9), rgba(12, 14, 30, 0.9)),
+    radial-gradient(
+      circle at 30% 30%,
+      rgba(255, 255, 255, 0.08),
+      transparent 60%
+    );
+  backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  outline: 1px solid rgba(255, 255, 255, 0.03);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -220,9 +274,26 @@
   cursor: pointer;
   pointer-events: auto;
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.4),
-    0 0 20px var(--icon-color, transparent);
+    0 8px 28px rgba(0, 0, 0, 0.45),
+    0 0 18px var(--icon-color, transparent);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: iconAura 6s ease-in-out infinite;
+  isolation: isolate;
+}
+
+.techIcon::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.12),
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
 }
 
 .techIcon:nth-child(1) {
@@ -285,12 +356,28 @@
   right: 20%;
 }
 
+.techIcon:hover {
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.6),
+    0 0 28px var(--icon-color, transparent);
+  border-color: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(
+    145deg,
+    rgba(26, 32, 60, 0.9),
+    rgba(14, 18, 36, 0.92)
+  );
+}
+
+.techIcon:hover::after {
+  opacity: 0.5;
+}
+
 .techTooltip {
   position: absolute;
   bottom: -30px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(6, 8, 20, 0.92);
   color: #fff;
   padding: 4px 8px;
   border-radius: 6px;
@@ -300,10 +387,27 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px) saturate(140%);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
 
 .techIcon:hover .techTooltip {
   opacity: 1;
+}
+
+@keyframes iconAura {
+  0%,
+  100% {
+    box-shadow:
+      0 8px 28px rgba(0, 0, 0, 0.45),
+      0 0 18px var(--icon-color, transparent);
+  }
+  50% {
+    box-shadow:
+      0 12px 38px rgba(0, 0, 0, 0.55),
+      0 0 26px var(--icon-color, transparent);
+  }
 }
 
 /* Tech Stack Grid Section */
@@ -328,6 +432,12 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+}
+
+.ctaContainer {
+  margin-top: 32px;
+  display: flex;
+  gap: 16px;
 }
 
 .techBadge {
@@ -368,14 +478,37 @@
   align-items: flex-start;
   padding: clamp(18px, 2.5vw, 24px) clamp(20px, 3vw, 28px);
   border-radius: 16px;
-  background: rgba(25, 25, 40, 0.6);
-  border: 1px solid rgba(168, 85, 247, 0.2);
+  background: rgba(25, 25, 40, 0.7);
+  border: 1px solid rgba(168, 85, 247, 0.3);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   min-width: clamp(140px, 16vw, 170px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(168, 85, 247, 0.1);
   cursor: pointer;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.counter::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(168, 85, 247, 0.15) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.counter:hover::after {
+  opacity: 1;
 }
 
 .counter::before {
@@ -384,22 +517,26 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
+  height: 3px;
   background: linear-gradient(
     90deg,
     rgba(168, 85, 247, 0) 0%,
-    rgba(168, 85, 247, 0.8) 50%,
-    rgba(168, 85, 247, 0) 100%
+    rgba(168, 85, 247, 1) 50%,
+    rgba(236, 72, 153, 0.8) 75%,
+    rgba(236, 72, 153, 0) 100%
   );
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .counter:hover {
-  border-color: rgba(168, 85, 247, 0.4);
+  border-color: rgba(168, 85, 247, 0.6);
+  background: rgba(25, 25, 40, 0.85);
+  transform: translateY(-4px);
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.4),
-    0 0 24px rgba(168, 85, 247, 0.15);
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(168, 85, 247, 0.3),
+    inset 0 0 20px rgba(168, 85, 247, 0.05);
 }
 
 .counter:hover::before {
@@ -408,14 +545,25 @@
 
 .counterNumber {
   font-size: clamp(2.2rem, 4.5vw, 3rem);
-  font-weight: 800;
-  background: linear-gradient(135deg, #a855f7, #ec4899);
+  font-weight: 900;
+  background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   line-height: 1;
   margin-bottom: clamp(8px, 1.5vw, 12px);
-  filter: drop-shadow(0 2px 8px rgba(168, 85, 247, 0.3));
+  filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.4));
+  animation: numberGlow 2s ease-in-out infinite;
+}
+
+@keyframes numberGlow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(236, 72, 153, 0.6));
+  }
 }
 
 .counterLabel {
@@ -450,24 +598,43 @@
   overflow: hidden;
 }
 
-/* Removed flexContainer::before blurred gradient effect for cleaner look */
+.flexContainer::before {
+  content: "";
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.2) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+}
 
 .fontBoldImp {
   font-weight: 900 !important;
 }
 
 .titleText {
-  font-weight: 600;
+  font-weight: 700;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: clamp(0.75rem, 1.5vw, 0.9rem);
   display: inline-block;
-  color: rgba(168, 85, 247, 0.85);
+  background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-transform: uppercase;
   letter-spacing: 0.2em;
   margin: 0 0 clamp(16px, 2vw, 24px) 0;
   line-height: 1;
   position: relative;
   padding: 0;
+  text-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
 }
 
 .titleText::before {
@@ -566,19 +733,7 @@
     rgba(236, 72, 153, 0.4)
   );
   box-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
-  animation: particleFloat 4s ease-in-out infinite;
-}
-
-@keyframes particleFloat {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.3;
-  }
-  50% {
-    transform: translate(10px, -10px) scale(1.2);
-    opacity: 0.8;
-  }
+  opacity: 0.4;
 }
 
 /* Rotating tech icons inside circle */

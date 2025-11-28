@@ -1,8 +1,9 @@
 .container {
   position: relative;
   min-height: 100vh;
-  background: linear-gradient(to bottom, #0a0a0a 0%, #1a1a2e 100%);
+  background: linear-gradient(to bottom, #0f0f1e 0%, #1a1a2e 100%);
   color: #f4f4f4;
+  overflow-x: clip;
 }
 
 /* Hero Section */
@@ -376,6 +377,7 @@
 }
 
 /* Responsive Design */
+/* iPad Pro (1024px) */
 @media (max-width: 1024px) {
   .contentWrapper {
     grid-template-columns: 1fr;
@@ -389,9 +391,50 @@
   .topicsGrid {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .heroTitle {
+    font-size: 3rem;
+  }
 }
 
+/* iPad/Tablets (900px) */
+@media (max-width: 900px) {
+  .hero {
+    padding: 120px 30px 70px;
+  }
+
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1.1rem;
+  }
+
+  .topicsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .postCard {
+    grid-template-columns: 200px 1fr;
+  }
+
+  .postContent {
+    padding: 20px;
+  }
+
+  .postTitle {
+    font-size: 1.3rem;
+  }
+}
+
+/* Smaller tablets and large phones (768px) */
 @media (max-width: 768px) {
+  .hero {
+    padding: 100px 20px 60px;
+  }
+
   .postCard {
     grid-template-columns: 1fr;
   }
@@ -414,7 +457,16 @@
   }
 }
 
+/* Small phones (480px) */
 @media (max-width: 480px) {
+  .hero {
+    padding: 80px 16px 40px;
+  }
+
+  .heroTitle {
+    font-size: 1.8rem;
+  }
+
   .postFooter {
     flex-direction: column;
     align-items: flex-start;

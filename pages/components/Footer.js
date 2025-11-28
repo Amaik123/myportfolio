@@ -154,20 +154,21 @@ export default function Footer() {
           <motion.div className={styles.column} variants={itemVariants}>
             <h3 className={styles.columnTitle}>Specifics</h3>
             <ul className={styles.linkList}>
-              {["Guest Book", "Bucket List", "Uses", "Attribution"].map(
-                (item) => (
-                  <motion.li
-                    key={item}
-                    variants={linkVariants}
-                    whileHover="hover"
-                    initial="rest"
-                  >
-                    <a href={`/${item.toLowerCase().replace(" ", "-")}`}>
-                      {item}
-                    </a>
-                  </motion.li>
-                )
-              )}
+              {[
+                { name: "Guestbook", href: "/guestbook" },
+                { name: "Bucket List", href: "/bucketlist" },
+                { name: "Timeline", href: "/timeline" },
+                { name: "Uses", href: "/uses" },
+              ].map((item) => (
+                <motion.li
+                  key={item.name}
+                  variants={linkVariants}
+                  whileHover="hover"
+                  initial="rest"
+                >
+                  <a href={item.href}>{item.name}</a>
+                </motion.li>
+              ))}
             </ul>
           </motion.div>
 

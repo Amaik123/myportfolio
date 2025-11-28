@@ -16,6 +16,8 @@ import {
   SiNextdotjs,
   SiTailwindcss,
 } from "react-icons/si";
+import ScrambleText from "./components/ScrambleText";
+import MagneticButton from "./components/MagneticButton";
 
 // Dynamic import to avoid SSR issues
 const GradientText = dynamic(() => import("./components/GradientText"), {
@@ -101,15 +103,29 @@ export default function ThreeDCard() {
 
   // Track mouse position for parallax effects
   useEffect(() => {
+    let rafId = null;
+    let lastX = 0;
+    let lastY = 0;
+
     const handleMouseMove = (e) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth - 0.5) * 20,
-        y: (e.clientY / window.innerHeight - 0.5) * 20,
-      });
+      const newX = (e.clientX / window.innerWidth - 0.5) * 20;
+      const newY = (e.clientY / window.innerHeight - 0.5) * 20;
+
+      if (Math.abs(newX - lastX) > 0.1 || Math.abs(newY - lastY) > 0.1) {
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(() => {
+          setMousePosition({ x: newX, y: newY });
+          lastX = newX;
+          lastY = newY;
+        });
+      }
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   // Helper functions
@@ -127,11 +143,11 @@ export default function ThreeDCard() {
     function animate() {
       if (!isMouseOverRef.current) {
         // Smoothly return angles back to 0 when not hovered
-        rotateXRef.current = lerp(rotateXRef.current, 0, 0.05);
-        rotateYRef.current = lerp(rotateYRef.current, 0, 0.05);
+        rotateXRef.current = lerp(rotateXRef.current, 0, 0.08);
+        rotateYRef.current = lerp(rotateYRef.current, 0, 0.08);
       }
       if (cardRef.current) {
-        cardRef.current.style.transform = `rotateX(${rotateXRef.current}deg) rotateY(${rotateYRef.current}deg)`;
+        cardRef.current.style.transform = `translate3d(0, 0, 0) rotateX(${rotateXRef.current}deg) rotateY(${rotateYRef.current}deg)`;
       }
       rAF = requestAnimationFrame(animate);
     }
@@ -288,7 +304,7 @@ export default function ThreeDCard() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            The Tech{" "}
+            <ScrambleText text="The Tech" delay={600} />{" "}
             <span className={styles.fontsubText}>
               <GradientText
                 colors={["#a855f7", "#ec4899", "#f59e0b", "#ec4899", "#a855f7"]}
@@ -358,6 +374,18 @@ export default function ThreeDCard() {
                 </motion.div>
               ))}
             </div>
+          </motion.div>
+
+          {/* CTA Button */}
+          <motion.div
+            className={styles.ctaContainer}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.2 }}
+          >
+            <MagneticButton as="a" href="/work" strength={50}>
+              View My Work
+            </MagneticButton>
           </motion.div>
 
           <section className="counters-section" ref={ref}>

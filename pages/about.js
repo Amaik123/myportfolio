@@ -1,10 +1,11 @@
 import Head from "next/head";
+import { useState, useEffect } from "react";
 import AboutCarousel from "./components/AboutCarousel";
 import ExperienceTimeline from "./components/ExperienceTimeline";
 import styles from "../styles/About.module.css";
 import NavBar from "./NavBar";
 import Footer from "./components/Footer";
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import {
   FaReact,
   FaNodeJs,
@@ -14,6 +15,112 @@ import {
   FaCode,
 } from "react-icons/fa";
 import { SiTypescript, SiNextdotjs } from "react-icons/si";
+import ScrambleText from "./components/ScrambleText";
+import MagneticButton from "./components/MagneticButton";
+
+// Custom cursor component
+const CustomCursor = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleMouseOver = (e) => {
+      if (
+        e.target.tagName === "A" ||
+        e.target.tagName === "BUTTON" ||
+        e.target.closest("a") ||
+        e.target.closest("button")
+      ) {
+        setIsHovering(true);
+      } else {
+        setIsHovering(false);
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseover", handleMouseOver);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseover", handleMouseOver);
+    };
+  }, []);
+
+  if (typeof window !== "undefined" && window.innerWidth < 768) {
+    return null;
+  }
+
+  return (
+    <>
+      <motion.div
+        style={{
+          position: "fixed",
+          left: mousePosition.x - 10,
+          top: mousePosition.y - 10,
+          width: 20,
+          height: 20,
+          borderRadius: "50%",
+          border: "2px solid rgba(168, 85, 247, 0.8)",
+          pointerEvents: "none",
+          zIndex: 9999,
+          mixBlendMode: "difference",
+        }}
+        animate={{
+          scale: isHovering ? 2 : 1,
+          backgroundColor: isHovering
+            ? "rgba(168, 85, 247, 0.3)"
+            : "transparent",
+        }}
+        transition={{ type: "spring", stiffness: 500, damping: 28 }}
+      />
+      <motion.div
+        style={{
+          position: "fixed",
+          left: mousePosition.x - 4,
+          top: mousePosition.y - 4,
+          width: 8,
+          height: 8,
+          borderRadius: "50%",
+          backgroundColor: "#ec4899",
+          pointerEvents: "none",
+          zIndex: 9999,
+        }}
+        animate={{ scale: isHovering ? 0 : 1 }}
+        transition={{ type: "spring", stiffness: 500, damping: 28 }}
+      />
+    </>
+  );
+};
+
+// Scroll progress indicator
+const ScrollProgress = () => {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  return (
+    <motion.div
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        height: 3,
+        background: "linear-gradient(90deg, #a855f7, #ec4899, #f59e0b)",
+        transformOrigin: "0%",
+        scaleX,
+        zIndex: 9998,
+      }}
+    />
+  );
+};
 
 const traits = [
   { text: "Azure Certified (AZ-104, AI-102)", icon: FaLightbulb },
@@ -100,8 +207,24 @@ const itemVariants = {
 };
 
 export default function AboutPage() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
-    <>
+    <div
+      style={{
+        cursor:
+          mounted && typeof window !== "undefined" && window.innerWidth >= 768
+            ? "none"
+            : "auto",
+      }}
+    >
+      {mounted && <CustomCursor />}
+      <ScrollProgress />
+
       <Head>
         <title>About | Aakash</title>
         <meta
@@ -156,7 +279,7 @@ export default function AboutPage() {
                 More about me
               </motion.span>
               <motion.h1 className={styles.title} variants={itemVariants}>
-                I'm Aakash, a creative{" "}
+                I'm Aakash, a <ScrambleText text="creative" delay={400} />{" "}
                 <span className={styles.highlightWord}>engineer</span>
               </motion.h1>
               <motion.p className={styles.lead} variants={itemVariants}>
@@ -311,6 +434,6 @@ export default function AboutPage() {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

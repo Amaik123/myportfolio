@@ -1,0 +1,64 @@
+.scrambleText {
+  display: inline;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.scrambleContent {
+  display: inline;
+}
+
+.scrambleChar {
+  display: inline;
+  transition: color 0.1s ease;
+}
+
+.scrambleCursor {
+  display: inline;
+  color: #a855f7;
+  animation: blink 0.8s infinite;
+  margin-left: 2px;
+  vertical-align: baseline;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.scrambleTitle {
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, #fff 0%, #a855f7 50%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glitch effect on scrambling */
+.scrambleText[data-scrambling="true"] .scrambleChar {
+  text-shadow:
+    -1px 0 #a855f7,
+    1px 0 #ec4899;
+}
+
+/* Matrix rain effect variant */
+.scrambleMatrix {
+  color: #22c55e;
+  text-shadow: 0 0 10px #22c55e;
+}
+
+/* Cyber effect */
+.scrambleCyber .scrambleChar {
+  color: #06b6d4;
+  text-shadow:
+    0 0 5px #06b6d4,
+    0 0 10px #06b6d4,
+    0 0 20px #06b6d4;
+}

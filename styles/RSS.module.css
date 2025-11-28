@@ -1,0 +1,573 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0a0a12 0%, #0f0f1e 50%, #0a0a12 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  padding: 120px 24px 80px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 900px;
+  height: 600px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(79, 172, 254, 0.15) 0%,
+    rgba(0, 242, 254, 0.08) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heroLabel {
+  display: block;
+  padding: 8px 20px;
+  background: rgba(79, 172, 254, 0.15);
+  border: 1px solid rgba(79, 172, 254, 0.3);
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #4facfe;
+  margin-bottom: 24px;
+  width: fit-content;
+}
+
+.heroTitle {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 20px 0;
+  line-height: 1.2;
+  text-align: center;
+  width: 100%;
+}
+
+.heroHighlight {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 50%, #43e97b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroSubtitle {
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.7;
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+.floatingEmoji {
+  position: absolute;
+  font-size: 2.5rem;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* Info Section */
+.infoSection {
+  padding: 40px 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.infoCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 40px;
+}
+
+.infoCard h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 16px 0;
+}
+
+.infoCard > p {
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.7;
+  margin: 0 0 24px 0;
+}
+
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.benefit {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: rgba(79, 172, 254, 0.1);
+  border-radius: 12px;
+}
+
+.benefitIcon {
+  font-size: 1.3rem;
+}
+
+.benefit span:last-child {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+}
+
+/* Feeds Section */
+.feedsSection {
+  padding: 60px 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.sectionSubtitle {
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  font-size: 1.05rem;
+  margin-bottom: 40px;
+}
+
+.feedsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.feedCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.feedCard:hover {
+  border-color: rgba(79, 172, 254, 0.4);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.feedHeader {
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.feedIcon {
+  font-size: 2.5rem;
+}
+
+.feedTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.feedBody {
+  padding: 24px 30px 30px;
+}
+
+.feedDescription {
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin: 0 0 20px 0;
+}
+
+.feedItems {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+}
+
+.feedItems li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+}
+
+.checkmark {
+  color: #43e97b;
+  font-weight: bold;
+}
+
+.feedActions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.subscribeBtn,
+.copyBtn {
+  flex: 1;
+  min-width: 120px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.subscribeBtn {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  border: none;
+  color: #0a0a12;
+}
+
+.copyBtn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.subscribeBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+}
+
+.copyBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.copyBtn.copied {
+  background: rgba(67, 233, 123, 0.2);
+  border-color: #43e97b;
+  color: #43e97b;
+}
+
+.rssIcon {
+  font-size: 1rem;
+}
+
+/* Readers Section */
+.readersSection {
+  padding: 60px 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.readersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.readerCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.readerCard:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(79, 172, 254, 0.4);
+}
+
+.readerIcon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.readerName {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 8px 0;
+}
+
+.readerDescription {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* How To Section */
+.howToSection {
+  padding: 60px 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.howToCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 40px;
+}
+
+.howToCard h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 30px 0;
+  text-align: center;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.stepNumber {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #0a0a12;
+}
+
+.stepContent h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 6px 0;
+}
+
+.stepContent p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Back Section */
+.backSection {
+  padding: 40px 24px 80px;
+  text-align: center;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.backLink:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transform: translateX(-5px);
+}
+
+/* Responsive */
+
+/* iPad Pro (1024px) */
+@media (max-width: 1024px) {
+  .hero {
+    padding: 140px 40px 80px;
+  }
+
+  .heroTitle {
+    font-size: 3rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1.15rem;
+  }
+
+  .infoSection,
+  .feedsSection,
+  .howToSection {
+    padding: 40px 30px;
+  }
+
+  .feedsGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .benefits {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .readersGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* iPad/Tablets (900px) */
+@media (max-width: 900px) {
+  .hero {
+    padding: 120px 30px 70px;
+  }
+
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+
+  .infoCard,
+  .howToCard {
+    padding: 28px;
+  }
+
+  .benefits {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .feedsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .feedHeader {
+    padding: 28px;
+  }
+
+  .feedBody {
+    padding: 24px 28px 28px;
+  }
+
+  .readersGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Smaller tablets and large phones (768px) */
+@media (max-width: 768px) {
+  .hero {
+    padding: 100px 20px 60px;
+  }
+
+  .heroTitle {
+    font-size: 2.2rem;
+  }
+
+  .infoCard,
+  .howToCard {
+    padding: 24px;
+  }
+
+  .benefits {
+    grid-template-columns: 1fr;
+  }
+
+  .feedsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .feedHeader {
+    padding: 24px;
+  }
+
+  .feedBody {
+    padding: 20px 24px 24px;
+  }
+
+  .feedActions {
+    flex-direction: column;
+  }
+
+  .readersGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .step {
+    gap: 16px;
+  }
+
+  .floatingEmoji {
+    font-size: 1.8rem;
+  }
+}
+
+/* Small phones (480px) */
+@media (max-width: 480px) {
+  .hero {
+    padding: 80px 16px 40px;
+  }
+
+  .heroTitle {
+    font-size: 1.8rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1rem;
+  }
+
+  .infoCard,
+  .howToCard {
+    padding: 20px;
+  }
+
+  .readersGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .stepNumber {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    font-size: 1rem;
+  }
+}

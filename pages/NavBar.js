@@ -1,4 +1,10 @@
-import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useLayoutEffect,
+  useCallback,
+} from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { gsap } from "gsap";
@@ -9,7 +15,7 @@ const NAV_ITEMS = [
   { id: "about", label: "About", href: "/about" },
   { id: "work", label: "Work", href: "/work" },
   { id: "blog", label: "Blog", href: "/blog" },
-  { id: "more", label: "More", href: "/#more" },
+  { id: "more", label: "More", href: "/more" },
   {
     id: "cta",
     label: "Book a Call",
@@ -44,6 +50,10 @@ const getActiveFromPath = (asPath) => {
     return "blog";
   }
 
+  if (basePath === "/more") {
+    return "more";
+  }
+
   return "home";
 };
 
@@ -57,13 +67,13 @@ export default function NavBar() {
   const itemsRef = useRef({});
   const indicatorRef = useRef(null);
 
-  const setItemRef = (id, el) => {
+  const setItemRef = useCallback((id, el) => {
     if (el) {
       itemsRef.current[id] = el;
     } else {
       delete itemsRef.current[id];
     }
-  };
+  }, []);
 
   useEffect(() => {
     setActive(getActiveFromPath(router.asPath));
@@ -83,6 +93,21 @@ export default function NavBar() {
   }, [mobileMenuOpen]);
 
   useIsomorphicLayoutEffect(() => {
+    // Capture all nav item elements
+    const navInner = document.querySelector(`.${styles.navInner}`);
+    if (navInner) {
+      NAV_ITEMS.forEach(({ id, external }) => {
+        if (!external) {
+          const linkEl = navInner.querySelector(
+            `a[href="${NAV_ITEMS.find((item) => item.id === id)?.href}"]`
+          );
+          if (linkEl) {
+            setItemRef(id, linkEl);
+          }
+        }
+      });
+    }
+
     const activeEl = itemsRef.current[active];
     if (activeEl && indicatorRef.current) {
       gsap.set(indicatorRef.current, {
@@ -90,7 +115,7 @@ export default function NavBar() {
         width: activeEl.offsetWidth,
       });
     }
-  }, []);
+  }, [active, setItemRef]);
 
   useEffect(() => {
     const activeEl = itemsRef.current[active];
@@ -160,10 +185,15 @@ export default function NavBar() {
               key={id}
               href={href}
               className={className}
-              ref={(el) => setItemRef(id, el)}
-              onClick={() => {
+              onClick={(e) => {
+                const target = e.currentTarget;
+                setItemRef(id, target);
                 setActive(id);
                 setMobileMenuOpen(false);
+              }}
+              onMouseEnter={(e) => {
+                const target = e.currentTarget;
+                setItemRef(id, target);
               }}
             >
               <span>{label}</span>

@@ -6,8 +6,115 @@ import { FaGithub, FaExternalLinkAlt, FaCode, FaRocket } from "react-icons/fa";
 import styles from "../styles/Work.module.css";
 import Footer from "./components/Footer";
 import NavBar from "./NavBar";
+import { motion, useScroll, useSpring } from "framer-motion";
+import ScrambleText from "./components/ScrambleText";
+import MagneticButton from "./components/MagneticButton";
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Custom cursor component
+const CustomCursor = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleMouseOver = (e) => {
+      if (
+        e.target.tagName === "A" ||
+        e.target.tagName === "BUTTON" ||
+        e.target.closest("a") ||
+        e.target.closest("button")
+      ) {
+        setIsHovering(true);
+      } else {
+        setIsHovering(false);
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseover", handleMouseOver);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseover", handleMouseOver);
+    };
+  }, []);
+
+  if (typeof window !== "undefined" && window.innerWidth < 768) {
+    return null;
+  }
+
+  return (
+    <>
+      <motion.div
+        style={{
+          position: "fixed",
+          left: mousePosition.x - 10,
+          top: mousePosition.y - 10,
+          width: 20,
+          height: 20,
+          borderRadius: "50%",
+          border: "2px solid rgba(168, 85, 247, 0.8)",
+          pointerEvents: "none",
+          zIndex: 9999,
+          mixBlendMode: "difference",
+        }}
+        animate={{
+          scale: isHovering ? 2 : 1,
+          backgroundColor: isHovering
+            ? "rgba(168, 85, 247, 0.3)"
+            : "transparent",
+        }}
+        transition={{ type: "spring", stiffness: 500, damping: 28 }}
+      />
+      <motion.div
+        style={{
+          position: "fixed",
+          left: mousePosition.x - 4,
+          top: mousePosition.y - 4,
+          width: 8,
+          height: 8,
+          borderRadius: "50%",
+          backgroundColor: "#ec4899",
+          pointerEvents: "none",
+          zIndex: 9999,
+        }}
+        animate={{ scale: isHovering ? 0 : 1 }}
+        transition={{ type: "spring", stiffness: 500, damping: 28 }}
+      />
+    </>
+  );
+};
+
+// Scroll progress indicator
+const ScrollProgress = () => {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  return (
+    <motion.div
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        height: 3,
+        background: "linear-gradient(90deg, #a855f7, #ec4899, #f59e0b)",
+        transformOrigin: "0%",
+        scaleX,
+        zIndex: 9998,
+      }}
+    />
+  );
+};
 
 const portfolioProjects = [
   {
@@ -199,7 +306,14 @@ const portfolioProjects = [
       "Average open rate of 28%",
       "99.9% email deliverability",
     ],
-    tech: ["React", "Next.js", "TypeScript", "Node.js", "PostgreSQL", "SendGrid"],
+    tech: [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Node.js",
+      "PostgreSQL",
+      "SendGrid",
+    ],
     gradient: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)",
     github: "#",
     live: "#",
@@ -227,7 +341,14 @@ const portfolioProjects = [
       "Processing 100,000+ studies annually",
       "100% HIPAA compliance certification",
     ],
-    tech: ["React", "Cornerstone.js", "DICOM Web", "WebGL", "Node.js", "Docker"],
+    tech: [
+      "React",
+      "Cornerstone.js",
+      "DICOM Web",
+      "WebGL",
+      "Node.js",
+      "Docker",
+    ],
     gradient: "linear-gradient(135deg, #00c6ff 0%, #0072ff 100%)",
     github: "#",
     live: "#",
@@ -243,6 +364,11 @@ export default function WorkPage() {
   const projectRefs = useRef([]);
   const [selectedProject, setSelectedProject] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Fix body scroll
   useEffect(() => {
@@ -439,7 +565,19 @@ export default function WorkPage() {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      style={{
+        cursor:
+          mounted && typeof window !== "undefined" && window.innerWidth >= 768
+            ? "none"
+            : "auto",
+      }}
+    >
+      {/* Custom Cursor & Scroll Progress */}
+      {mounted && <CustomCursor />}
+      <ScrollProgress />
+
       {/* Navigation */}
       <NavBar />
 
@@ -455,13 +593,15 @@ export default function WorkPage() {
         <div className={styles.heroContent}>
           <span className={styles.heroLabel}>Portfolio</span>
           <h1 className={styles.heroTitle}>
-            Featured <span className={styles.heroHighlight}>Projects</span>
+            <ScrambleText text="Featured" delay={300} />{" "}
+            <span className={styles.heroHighlight}>Projects</span>
           </h1>
           <p className={styles.heroSubtitle}>
-            A comprehensive portfolio showcasing 6+ years of full-stack development across healthcare, 
-            content platforms, and enterprise solutions. Each project demonstrates expertise in React, 
-            Node.js, cloud architecture, and modern development practices - delivering scalable, 
-            production-ready applications.
+            A comprehensive portfolio showcasing 6+ years of full-stack
+            development across healthcare, content platforms, and enterprise
+            solutions. Each project demonstrates expertise in React, Node.js,
+            cloud architecture, and modern development practices - delivering
+            scalable, production-ready applications.
           </p>
           <div className={styles.heroStats}>
             <div className={styles.stat}>

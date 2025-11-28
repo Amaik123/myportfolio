@@ -3,27 +3,129 @@
   padding: 0;
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
+  background: linear-gradient(180deg, #0f0f1e 0%, #1a1a2e 100%);
 }
 
 .main {
   padding: 10rem 0;
   min-height: 100vh;
-  background-color: #000;
+  background: linear-gradient(180deg, #0f0f1e 0%, #1a1a2e 50%, #0f0f1e 100%);
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
+  position: relative;
 }
 
+.main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(168, 85, 247, 0.18) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(236, 72, 153, 0.18) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(139, 92, 246, 0.12) 0%,
+      transparent 55%
+    );
+  pointer-events: none;
+  z-index: 0;
+  animation: ambientPulse 8s ease-in-out infinite;
+}
+
+@keyframes ambientPulse {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* iPad Pro (1024px) */
+@media (max-width: 1024px) {
+  .main {
+    padding: 10rem 0 5rem;
+  }
+
+  .title {
+    font-size: 3.2rem;
+  }
+
+  .description {
+    font-size: 1.35rem;
+  }
+
+  .grid {
+    max-width: 700px;
+  }
+}
+
+/* iPad/Tablets (900px) */
+@media (max-width: 900px) {
+  .main {
+    padding: 9rem 0 4.5rem;
+  }
+
+  .title {
+    font-size: 2.8rem;
+  }
+
+  .description {
+    font-size: 1.25rem;
+  }
+
+  .grid {
+    max-width: 600px;
+    gap: 16px;
+  }
+
+  .card {
+    flex-basis: 48%;
+    padding: 1.25rem;
+  }
+}
+
+/* Smaller tablets and large phones (768px) */
 @media (max-width: 768px) {
   .main {
     padding: 8rem 0 4rem;
   }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .card {
+    flex-basis: 100%;
+  }
 }
 
+/* Small phones (480px) */
 @media (max-width: 480px) {
   .main {
     padding: 6rem 0 3rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 1rem;
   }
 }
 

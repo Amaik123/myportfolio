@@ -48,90 +48,144 @@
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.5rem 0.6rem;
+  padding: 0.6rem 0.8rem;
   border-radius: 999px;
   background:
     radial-gradient(
       circle at top left,
-      rgba(168, 85, 247, 0.15),
-      transparent 65%
+      rgba(168, 85, 247, 0.2),
+      transparent 60%
     ),
     radial-gradient(
       circle at bottom right,
-      rgba(236, 72, 153, 0.1),
-      transparent 65%
+      rgba(236, 72, 153, 0.15),
+      transparent 60%
     ),
-    rgba(20, 20, 32, 0.85);
-  border: 1px solid rgba(168, 85, 247, 0.2);
+    rgba(15, 15, 30, 0.9);
+  border: 1.5px solid rgba(168, 85, 247, 0.3);
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(255, 255, 255, 0.05) inset,
-    0 0 60px -20px rgba(168, 85, 247, 0.3);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+    0 8px 32px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 0 80px -20px rgba(168, 85, 247, 0.5),
+    0 4px 16px rgba(168, 85, 247, 0.2);
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
   overflow: visible;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navInner::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 0.3),
+    rgba(236, 72, 153, 0.2),
+    rgba(168, 85, 247, 0.3)
+  );
+  border-radius: 999px;
+  opacity: 0;
+  filter: blur(8px);
+  transition: opacity 0.4s ease;
+  z-index: -1;
 }
 
 .navInner:hover {
-  border-color: rgba(168, 85, 247, 0.35);
+  border-color: rgba(168, 85, 247, 0.5);
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(168, 85, 247, 0.25),
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(236, 72, 153, 0.2),
+      transparent 60%
+    ),
+    rgba(15, 15, 30, 0.95);
   box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.7),
-    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
-    0 0 80px -20px rgba(168, 85, 247, 0.4);
+    0 12px 48px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(255, 255, 255, 0.12) inset,
+    0 0 100px -20px rgba(168, 85, 247, 0.7),
+    0 6px 20px rgba(168, 85, 247, 0.3);
+}
+
+.navInner:hover::before {
+  opacity: 1;
 }
 
 .activeIndicator {
+  display: none; /* Using CSS-based active state instead */
   position: absolute;
-  top: 6px;
-  bottom: 6px;
+  top: 8px;
+  bottom: 8px;
   border-radius: 999px;
   background: linear-gradient(
     135deg,
-    rgba(168, 85, 247, 0.25),
-    rgba(236, 72, 153, 0.2)
+    rgba(168, 85, 247, 0.35),
+    rgba(236, 72, 153, 0.25)
   );
-  border: 1px solid rgba(168, 85, 247, 0.3);
+  border: 1px solid rgba(168, 85, 247, 0.5);
   box-shadow:
-    0 0 20px rgba(168, 85, 247, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    0 8px 16px -8px rgba(0, 0, 0, 0.4);
+    0 0 30px rgba(168, 85, 247, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 8px 20px -8px rgba(168, 85, 247, 0.4),
+    0 4px 12px rgba(236, 72, 153, 0.3);
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   z-index: 0;
   pointer-events: none;
+  will-change: transform, width;
 }
 
 .activeIndicator::before {
   content: "";
   position: absolute;
-  inset: -1px;
+  inset: -2px;
   border-radius: inherit;
   background: linear-gradient(
     135deg,
-    rgba(168, 85, 247, 0.1),
-    rgba(236, 72, 153, 0.05)
+    rgba(168, 85, 247, 0.2),
+    rgba(236, 72, 153, 0.15)
   );
-  opacity: 0.8;
-  filter: blur(8px);
+  opacity: 1;
+  filter: blur(12px);
+  animation: indicatorPulse 3s ease-in-out infinite;
+}
+
+@keyframes indicatorPulse {
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
 }
 
 .activeIndicator::after {
   content: "";
   position: absolute;
-  top: -16px;
+  top: -20px;
   left: 50%;
   transform: translateX(-50%);
-  width: 60%;
-  height: 14px;
+  width: 70%;
+  height: 18px;
   border-radius: 999px;
   background: linear-gradient(
     180deg,
-    rgba(168, 85, 247, 0.4),
-    rgba(236, 72, 153, 0.2),
+    rgba(168, 85, 247, 0.5),
+    rgba(236, 72, 153, 0.3),
     transparent
   );
-  filter: blur(6px);
-  opacity: 0.7;
+  filter: blur(8px);
+  opacity: 0.8;
 }
 
 .navItem {
@@ -145,14 +199,15 @@
   border: none;
   background: transparent;
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.7);
   font-size: 0.95rem;
   font-weight: 500;
-  padding: 0.65rem 1.5rem;
+  padding: 0.7rem 1.6rem;
   border-radius: 999px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .navItem::before {
@@ -161,34 +216,56 @@
   inset: 0;
   border-radius: inherit;
   background: rgba(255, 255, 255, 0);
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
 }
 
 .navItem span {
   pointer-events: none;
   position: relative;
   z-index: 1;
+  transition: all 0.3s ease;
 }
 
 .navItem:hover {
-  color: rgba(255, 255, 255, 0.95);
+  color: rgba(255, 255, 255, 1);
   transform: translateY(-2px);
+  text-shadow: 0 2px 8px rgba(168, 85, 247, 0.5);
 }
 
 .navItem:hover::before {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(168, 85, 247, 0.1);
+  border-color: rgba(168, 85, 247, 0.2);
+  box-shadow:
+    0 0 20px rgba(168, 85, 247, 0.2),
+    inset 0 0 10px rgba(168, 85, 247, 0.05);
 }
 
 .navItem:focus-visible {
   outline: none;
   color: #ffffff;
-  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.4);
+  box-shadow:
+    0 0 0 2px rgba(168, 85, 247, 0.5),
+    0 0 20px rgba(168, 85, 247, 0.3);
 }
 
 .navItemActive {
-  color: rgba(255, 255, 255, 0.98);
+  color: rgba(255, 255, 255, 1);
   font-weight: 600;
-  text-shadow: 0 2px 8px rgba(168, 85, 247, 0.3);
+  text-shadow:
+    0 2px 12px rgba(168, 85, 247, 0.6),
+    0 0 20px rgba(236, 72, 153, 0.4);
+  background: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 0.3),
+    rgba(236, 72, 153, 0.2)
+  );
+  border-radius: 999px;
+  box-shadow:
+    0 0 20px rgba(168, 85, 247, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 4px 12px rgba(168, 85, 247, 0.2);
+  border: 1px solid rgba(168, 85, 247, 0.4);
 }
 
 .navItemCTA {
@@ -196,17 +273,20 @@
   font-weight: 600;
   background: linear-gradient(
     135deg,
-    rgba(168, 85, 247, 0.8),
-    rgba(236, 72, 153, 0.7)
+    rgba(168, 85, 247, 0.9),
+    rgba(236, 72, 153, 0.8)
   );
-  border: 1px solid rgba(168, 85, 247, 0.4);
+  border: 1.5px solid rgba(168, 85, 247, 0.6);
   box-shadow:
-    0 4px 16px rgba(168, 85, 247, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  padding: 0.65rem 1.75rem;
-  margin-left: 0.3rem;
+    0 4px 20px rgba(168, 85, 247, 0.5),
+    0 2px 8px rgba(236, 72, 153, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 0 30px rgba(168, 85, 247, 0.3);
+  padding: 0.7rem 1.9rem;
+  margin-left: 0.4rem;
   position: relative;
   overflow: hidden;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .navItemCTA::before {
@@ -215,23 +295,54 @@
   inset: 0;
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.2),
-    transparent 60%
+    rgba(255, 255, 255, 0.3),
+    transparent 50%
   );
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
+.navItemCTA::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 0.6),
+    rgba(236, 72, 153, 0.4)
+  );
+  border-radius: inherit;
+  filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
 .navItemCTA:hover {
-  transform: translateY(-2px) scale(1.03);
+  transform: translateY(-3px) scale(1.05);
+  background: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 1),
+    rgba(236, 72, 153, 0.9)
+  );
   box-shadow:
-    0 8px 24px rgba(168, 85, 247, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  border-color: rgba(168, 85, 247, 0.6);
+    0 8px 32px rgba(168, 85, 247, 0.6),
+    0 4px 16px rgba(236, 72, 153, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 0 50px rgba(168, 85, 247, 0.5);
+  border-color: rgba(168, 85, 247, 0.8);
 }
 
 .navItemCTA:hover::before {
   opacity: 1;
+}
+
+.navItemCTA:hover::after {
+  opacity: 1;
+}
+
+.navItemCTA:active {
+  transform: translateY(-1px) scale(1.02);
 }
 
 /* Responsive Styles */

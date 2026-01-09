@@ -575,6 +575,51 @@
   object-fit: cover;
 }
 
+.modalSlideshow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 100%;
+}
+
+.slideNav {
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  color: white;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalThumbnails {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 8px 12px;
+  overflow-x: auto;
+}
+
+.thumb {
+  width: 60px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 8px;
+  opacity: 0.6;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.thumbActive {
+  opacity: 1;
+  border-color: #a855f7;
+}
+
 .modalBody {
   padding: clamp(32px, 6vw, 48px);
   display: flex;

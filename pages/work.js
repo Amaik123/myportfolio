@@ -174,6 +174,39 @@ const portfolioProjects = [
       "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1600&q=80",
   },
   {
+    id: "yft-your-fitness-tracker",
+    title: "YFT (Your Fitness Tracker)",
+    category: "Mobile App — Fitness",
+    subtitle: "Personalized AI‑driven daily briefings, workouts, hydration, and nutrition.",
+    description:
+      "Privacy‑forward React Native (Expo) fitness app with Firebase auth and a Groq Responses API orchestration layer that delivers resilient daily briefings, smart caching, and robust parsing to handle malformed AI responses.",
+    fullDescription: `YFT delivers personalized daily briefings combining steps, sleep, hydration, mood, and workout context with Groq-powered AI insights. I implemented token-bucket throttling, adaptive caching (stale-first + background refresh), defensive parsing helpers, and UI hardening to ensure briefings display reliably even when AI responses are malformed or rate-limited.`,
+    keyFeatures: [
+      "Smart cached briefings (stale-first) with background refresh and adaptive TTLs",
+      "Groq Responses orchestration with retries, model rotation, and token-bucket throttling",
+      "Robust JSON-extraction heuristics and defensive ensureObject/ensureArray helpers",
+      "Hydration & habit tracking with persistent state and reminders",
+      "Workout plans, session tracking, and live activity screens",
+      "Dev helpers and scripts for EAS dev clients and CI checks",
+    ],
+    results: [
+      "Fast UI with cached briefings while background refresh updates content",
+      "Resilient UX avoiding crashes from malformed AI outputs",
+      "Reduced API error impact via throttling and retry/backoff",
+    ],
+    tech: ["React Native", "Expo", "TypeScript", "Firebase", "Groq Responses API", "AsyncStorage"],
+    gradient: "linear-gradient(135deg, #00c6ff 0%, #0072ff 100%)",
+    github: "#",
+    live: "#",
+    image: "/YFT/yft-01.jpeg",
+    gallery: [
+      "/YFT/yft-01.jpeg",
+      "/YFT/yft-02.jpeg",
+      "/YFT/yft-03.jpeg",
+      "/YFT/yft-04.jpeg",
+    ],
+  },
+  {
     id: "boltech",
     title: "Boltech",
     category: "Dynamic Business Website",
@@ -363,6 +396,12 @@ export default function WorkPage() {
   const sceneRef = useRef(null);
   const projectRefs = useRef([]);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [galleryIndex, setGalleryIndex] = useState(0);
+
+  useEffect(() => {
+    // Reset gallery index whenever the selected project changes
+    setGalleryIndex(0);
+  }, [selectedProject]);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [mounted, setMounted] = useState(false);
 
@@ -734,11 +773,51 @@ export default function WorkPage() {
               ×
             </button>
             <div className={styles.modalHeader}>
-              <img
-                src={selectedProject.image}
-                alt={selectedProject.title}
-                className={styles.modalImage}
-              />
+              <div className={styles.modalSlideshow}>
+                <button
+                  className={styles.slideNav}
+                  onClick={() => setGalleryIndex((i) => Math.max(i - 1, 0))}
+                  aria-label="Previous image"
+                >
+                  ‹
+                </button>
+                <img
+                  src={
+                    selectedProject.gallery && selectedProject.gallery.length
+                      ? selectedProject.gallery[galleryIndex]
+                      : selectedProject.image
+                  }
+                  alt={selectedProject.title}
+                  className={styles.modalImage}
+                />
+                <button
+                  className={styles.slideNav}
+                  onClick={() =>
+                    setGalleryIndex((i) =>
+                      Math.min(i + 1, (selectedProject.gallery?.length ?? 1) - 1)
+                    )
+                  }
+                  aria-label="Next image"
+                >
+                  ›
+                </button>
+              </div>
+
+              {selectedProject.gallery && selectedProject.gallery.length > 1 && (
+                <div className={styles.modalThumbnails}>
+                  {selectedProject.gallery.map((g, idx) => (
+                    <img
+                      key={g}
+                      src={g}
+                      alt={`${selectedProject.title} ${idx + 1}`}
+                      className={`${styles.thumb} ${
+                        idx === galleryIndex ? styles.thumbActive : ""
+                      }`}
+                      onClick={() => setGalleryIndex(idx)}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
             <div className={styles.modalBody}>
               <span className={styles.modalCategory}>

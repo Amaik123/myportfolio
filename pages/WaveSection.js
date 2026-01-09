@@ -28,19 +28,19 @@ const countersData = [
     id: 1,
     end: 6,
     suffix: "+",
-    label: "YEARS OF EXPERIENCE",
+    label: "YEARS EXPERIENCE",
   },
   {
     id: 2,
-    end: 46,
-    suffix: "+",
-    label: "PROJECTS COMPLETED",
+    end: 8,
+    suffix: "",
+    label: "MAJOR PROJECTS",
   },
   {
     id: 3,
-    end: 20,
+    end: 15,
     suffix: "+",
-    label: "WORLDWIDE CLIENTS",
+    label: "TECHNOLOGIES",
   },
 ];
 
@@ -101,31 +101,11 @@ export default function ThreeDCard() {
     threshold: 0.3, // Trigger when 30% of the component is visible
   });
 
-  // Track mouse position for parallax effects
+  // Mouse tracking disabled for performance on home page
+  // Removed continuous mousemove handler to reduce CPU usage and reflows.
   useEffect(() => {
-    let rafId = null;
-    let lastX = 0;
-    let lastY = 0;
-
-    const handleMouseMove = (e) => {
-      const newX = (e.clientX / window.innerWidth - 0.5) * 20;
-      const newY = (e.clientY / window.innerHeight - 0.5) * 20;
-
-      if (Math.abs(newX - lastX) > 0.1 || Math.abs(newY - lastY) > 0.1) {
-        if (rafId) cancelAnimationFrame(rafId);
-        rafId = requestAnimationFrame(() => {
-          setMousePosition({ x: newX, y: newY });
-          lastX = newX;
-          lastY = newY;
-        });
-      }
-    };
-
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      if (rafId) cancelAnimationFrame(rafId);
-    };
+    // no-op
+    return () => {};
   }, []);
 
   // Helper functions
@@ -136,25 +116,14 @@ export default function ThreeDCard() {
     return Math.min(Math.max(value, min), max);
   }
 
-  // Animation loop: adjusts rotation every frame
+  // Card tilt animation disabled for performance.
+  // We keep a static transform and do not run a continuous animation loop.
   useEffect(() => {
-    let rAF;
-
-    function animate() {
-      if (!isMouseOverRef.current) {
-        // Smoothly return angles back to 0 when not hovered
-        rotateXRef.current = lerp(rotateXRef.current, 0, 0.08);
-        rotateYRef.current = lerp(rotateYRef.current, 0, 0.08);
-      }
-      if (cardRef.current) {
-        cardRef.current.style.transform = `translate3d(0, 0, 0) rotateX(${rotateXRef.current}deg) rotateY(${rotateYRef.current}deg)`;
-      }
-      rAF = requestAnimationFrame(animate);
+    if (cardRef.current) {
+      cardRef.current.style.transform = `translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg)`;
     }
-    animate();
-
-    return () => cancelAnimationFrame(rAF);
-  }, []); // empty array => run once on mount
+    return () => {};
+  }, []); // no continuous animation
 
   // Mouse move
   function handleMouseMove(e) {
@@ -197,40 +166,12 @@ export default function ThreeDCard() {
 
   return (
     <div className={styles.flexContainer}>
-      {/* Floating gradient orbs */}
-      <motion.div
-        className={styles.gradientOrb1}
-        animate={{
-          x: [0, 100, 0],
-          y: [0, -100, 0],
-          scale: [1, 1.2, 1],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      <motion.div
-        className={styles.gradientOrb2}
-        animate={{
-          x: [0, -100, 0],
-          y: [0, 100, 0],
-          scale: [1, 1.3, 1],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
+      {/* Static decorative gradient orbs (animations removed for performance) */}
+      <div className={styles.gradientOrb1} aria-hidden="true" />
+      <div className={styles.gradientOrb2} aria-hidden="true" />
 
       <div className={styles.cardContainer} ref={containerRef}>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, y: 50 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
+        <div>
           <ProfileCard
             name="Aakash K."
             title="Certified AI & Cloud Solutions Architect"
@@ -239,71 +180,33 @@ export default function ThreeDCard() {
             contactText="Contact Me"
             avatarUrl="/mypic.png"
             showUserInfo={true}
-            enableTilt={
-              typeof window !== "undefined" && window.innerWidth > 768
-            }
+            // Tilt disabled for performance on home page
+            enableTilt={false}
             enableMobileTilt={false}
             onContactClick={() => console.log("Contact clicked")}
           />
-        </motion.div>
+        </div>
 
         {/* Floating Tech Stack Icons around the card */}
         <div className={styles.floatingIcons}>
-          {techStack.map((tech, index) => (
-            <motion.div
+          {techStack.map((tech) => (
+            <div
               key={tech.name}
               className={styles.techIcon}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                x: mousePosition.x * (index % 2 === 0 ? 1 : -1) * 0.5,
-                y: mousePosition.y * (index % 3 === 0 ? 1 : -1) * 0.5,
-              }}
-              transition={{
-                delay: tech.delay,
-                duration: 0.5,
-                x: { duration: 0.3 },
-                y: { duration: 0.3 },
-              }}
-              whileHover={{
-                scale: 1.3,
-                rotate: 360,
-                transition: { duration: 0.6 },
-              }}
-              style={{
-                "--icon-color": tech.color,
-              }}
+              style={{ "--icon-color": tech.color }}
             >
               <TechIcon IconComponent={tech.IconComponent} color={tech.color} />
               <span className={styles.techTooltip}>{tech.name}</span>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
 
       <div className={styles.contentContainer}>
-        <motion.div
-          className={styles.textContainer}
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-        >
-          <motion.span
-            className={styles.titleText}
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            About Me
-          </motion.span>
+        <div className={styles.textContainer}>
+          <span className={styles.titleText}>About Me</span>
 
-          <motion.h1
-            className={styles.fontStyleHead}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          >
+          <h1 className={styles.fontStyleHead}>
             <ScrambleText text="The Tech" delay={600} />{" "}
             <span className={styles.fontsubText}>
               <GradientText
@@ -315,13 +218,9 @@ export default function ThreeDCard() {
                 Architect
               </GradientText>
             </span>
-          </motion.h1>
+          </h1>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
+          <div>
             <p className={styles.titleSubTask}>
               Certified AI & Cloud Solutions Architect | AZ-104 & AI-102
               Certified
@@ -345,25 +244,16 @@ export default function ThreeDCard() {
               technologies, with expertise in TypeScript, GraphQL, MongoDB, and
               Kubernetes.
             </p>
-          </motion.div>
+          </div>
 
           {/* Tech Stack Grid */}
-          <motion.div
-            className={styles.techStackGrid}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-          >
+          <div className={styles.techStackGrid}>
             <h3 className={styles.techStackTitle}>Tech Arsenal</h3>
             <div className={styles.techStackList}>
               {techStack.map((tech, index) => (
-                <motion.div
+                <div
                   key={tech.name}
                   className={styles.techBadge}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.9 + index * 0.05 }}
-                  whileHover={{ scale: 1.1, y: -5 }}
                   style={{ borderColor: tech.color }}
                 >
                   <TechIcon
@@ -371,39 +261,22 @@ export default function ThreeDCard() {
                     color={tech.color}
                   />
                   <span>{tech.name}</span>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* CTA Button */}
-          <motion.div
-            className={styles.ctaContainer}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
-          >
+          <div className={styles.ctaContainer}>
             <MagneticButton as="a" href="/work" strength={50}>
               View My Work
             </MagneticButton>
-          </motion.div>
+          </div>
 
           <section className="counters-section" ref={ref}>
-            <motion.div
-              className={styles.countersContainer}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: inView ? 1 : 0 }}
-              transition={{ duration: 0.6 }}
-            >
+            <div className={styles.countersContainer}>
               {countersData.map((counter, index) => (
-                <motion.div
-                  key={counter.id}
-                  className={styles.counter}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 30 }}
-                  transition={{ delay: 0.2 * index, duration: 0.6 }}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                >
+                <div key={counter.id} className={styles.counter}>
                   <div className={styles.counterNumber}>
                     {inView ? (
                       <CountUp
@@ -417,11 +290,11 @@ export default function ThreeDCard() {
                     )}
                   </div>
                   <p className={styles.counterLabel}>{counter.label}</p>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </section>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

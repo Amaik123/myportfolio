@@ -14,6 +14,7 @@ const NAV_ITEMS = [
   { id: "home", label: "Home", href: "/" },
   { id: "about", label: "About", href: "/about" },
   { id: "work", label: "Work", href: "/work" },
+  { id: "resume", label: "Resume", href: "/resume" },
   { id: "blog", label: "Blog", href: "/blog" },
   { id: "more", label: "More", href: "/more" },
   {
@@ -44,6 +45,10 @@ const getActiveFromPath = (asPath) => {
 
   if (basePath === "/work") {
     return "work";
+  }
+
+  if (basePath === "/resume") {
+    return "resume";
   }
 
   if (basePath === "/blog") {

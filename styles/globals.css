@@ -174,3 +174,15 @@ h1 {
     transform: translateX(2px) rotate(1deg);
   }
 }
+
+/* Global print styles to hide site chrome for /resume printing */
+@media print {
+  nav,
+  footer {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+}

@@ -177,7 +177,8 @@ const portfolioProjects = [
     id: "yft-your-fitness-tracker",
     title: "YFT (Your Fitness Tracker)",
     category: "Mobile App — Fitness",
-    subtitle: "Personalized AI‑driven daily briefings, workouts, hydration, and nutrition.",
+    subtitle:
+      "Personalized AI‑driven daily briefings, workouts, hydration, and nutrition.",
     description:
       "Privacy‑forward React Native (Expo) fitness app with Firebase auth and a Groq Responses API orchestration layer that delivers resilient daily briefings, smart caching, and robust parsing to handle malformed AI responses.",
     fullDescription: `YFT delivers personalized daily briefings combining steps, sleep, hydration, mood, and workout context with Groq-powered AI insights. I implemented token-bucket throttling, adaptive caching (stale-first + background refresh), defensive parsing helpers, and UI hardening to ensure briefings display reliably even when AI responses are malformed or rate-limited.`,
@@ -194,16 +195,23 @@ const portfolioProjects = [
       "Resilient UX avoiding crashes from malformed AI outputs",
       "Reduced API error impact via throttling and retry/backoff",
     ],
-    tech: ["React Native", "Expo", "TypeScript", "Firebase", "Groq Responses API", "AsyncStorage"],
+    tech: [
+      "React Native",
+      "Expo",
+      "TypeScript",
+      "Firebase",
+      "Groq Responses API",
+      "AsyncStorage",
+    ],
     gradient: "linear-gradient(135deg, #00c6ff 0%, #0072ff 100%)",
     github: "#",
     live: "#",
     image: "/YFT/yft-01.jpeg",
     gallery: [
-      "/YFT/yft-01.jpeg",
-      "/YFT/yft-02.jpeg",
-      "/YFT/yft-03.jpeg",
-      "/YFT/yft-04.jpeg",
+      "/YFT/yft-53.jpeg",
+      "/YFT/yft-54.jpeg",
+      "/YFT/yft-52.jpeg",
+      "/YFT/yft-51.jpeg",
     ],
   },
   {
@@ -387,6 +395,127 @@ const portfolioProjects = [
     live: "#",
     image:
       "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=1600&q=80",
+  },
+  {
+    id: "medical-insights-dashboard",
+    title: "Medical Insights — Live Dashboard",
+    category: "Healthcare — Analytics",
+    subtitle: "Real-time admin dashboard for clinical and operational KPIs.",
+    description:
+      "Led architecture and development of a real-time medical analytics platform enabling leadership to monitor product performance, clinical usage, and operational KPIs across regions and languages.",
+    fullDescription: `Designed scalable data models and aggregation pipelines to process high-volume healthcare data from multiple sources while maintaining consistency and auditability. Drove adoption of interactive drill-down visualizations to shift stakeholders from static reports to actionable insights. Implemented RBAC, partitioning, and audit trails to align with healthcare compliance. Optimized queries, caching, and async loading to reduce dashboard latency under peak load.
+
+Senior signal: ownership of architecture, performance trade-offs, and stakeholder alignment.`,
+    keyFeatures: [
+      "Real-time aggregated metrics and drill-down visualizations",
+      "Scalable ETL and aggregation pipelines for high-volume healthcare data",
+      "Role-based access control and audit trails for compliance",
+      "Query tuning and caching strategies to reduce latency",
+    ],
+    results: [
+      "Operational leaders gained near real-time visibility into KPIs",
+      "Substantial latency reductions under peak loads",
+      "Improved stakeholder decision cycles with interactive insights",
+    ],
+    tech: ["React", "Node.js", "PostgreSQL", "D3.js", "Kafka", "AWS"],
+    gradient: "linear-gradient(135deg, #00c6ff 0%, #0072ff 100%)",
+    github: "#",
+    live: "#",
+    image:
+      "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1600&q=80",
+    gallery: [
+      "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1600&q=80",
+    ],
+  },
+  {
+    id: "patient-mobile-app",
+    title: "Patient Mobile App",
+    category: "Healthcare — Mobile",
+    subtitle: "Patient-facing app for appointments, records, and engagement.",
+    description:
+      "Owned end-to-end design and delivery of a patient-facing mobile app supporting appointment management, medical records access, and longitudinal patient history.",
+    fullDescription: `Defined API contracts and backend workflows to ensure data consistency between mobile clients and clinical systems. Implemented secure auth and encryption, designed notification/reminder systems, and prioritized resilience with partial offline access and graceful degradation.
+
+Senior signal: cross-system thinking, security responsibility, and business impact.`,
+    keyFeatures: [
+      "Secure authentication and encrypted data access",
+      "Appointment management and reminders to drive adherence",
+      "Offline-first UX and graceful degradation",
+      "Interoperable APIs with clinical systems",
+    ],
+    results: [
+      "Improved appointment adherence and patient engagement",
+      "Resilient UX under limited network conditions",
+    ],
+    tech: ["React Native", "Expo", "FHIR/APIs", "OAuth2", "Firebase"],
+    gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
+    github: "#",
+    live: "#",
+    image:
+      "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1600&q=80",
+    gallery: [
+      "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1600&q=80",
+    ],
+  },
+  {
+    id: "document-editor",
+    title: "Advanced Document Editor",
+    category: "Web — Editor",
+    subtitle: "Web-based template & document editor built for scale.",
+    description:
+      "Architected a custom web editor supporting rich text, reusable templates, and structured content—designed for high concurrency and large documents.",
+    fullDescription: `Designed template versioning, permissions, and approval workflows for regulated content creation. Focused on format fidelity, performant auto-save, and export pipelines (PDF/DOCX), and enabled extensibility for domain-specific templates.
+
+Senior signal: platform thinking and non-trivial technical trade-offs.`,
+    keyFeatures: [
+      "Rich text editing with template versioning and approvals",
+      "High-concurrency performance and careful state management",
+      "Export fidelity (PDF/DOCX) and reliable auto-save",
+      "Permissions and workflow controls for enterprise scenarios",
+    ],
+    results: [
+      "Enabled teams to build domain-specific templates on top of the editor",
+      "Reduced content approval cycles through workflow automation",
+    ],
+    tech: ["React", "ProseMirror", "TypeScript", "Web Workers"],
+    gradient: "linear-gradient(135deg, #a855f7 0%, #ec4899 100%)",
+    github: "#",
+    live: "#",
+    image:
+      "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1600&q=80",
+    gallery: [
+      "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1600&q=80",
+    ],
+  },
+  {
+    id: "logistics-integrations",
+    title: "Logistics Systems & Integrations",
+    category: "Systems — Logistics",
+    subtitle: "Event-driven logistics & fulfillment integrations.",
+    description:
+      "Led integrations with multiple third-party logistics systems aligning vendor APIs into cohesive internal workflows.",
+    fullDescription: `Designed event-driven status-tracking mechanisms to provide near real-time visibility into shipment lifecycles. Automated reconciliation and exception handling, established retries and observability, and partnered with operations to reduce bottlenecks.
+
+Senior signal: reliability engineering, systems thinking, and operational ownership.`,
+    keyFeatures: [
+      "Event-driven architecture with near real-time visibility",
+      "Automated reconciliation and robust error handling",
+      "Observability and retry policies for external dependencies",
+      "Integration adapters for multiple vendor APIs",
+    ],
+    results: [
+      "Reduced manual reconciliation and improved reliability",
+      "Increased operational visibility into fulfillment flows",
+    ],
+    tech: ["Node.js", "RabbitMQ/Kafka", "AWS", "REST/SOAP adapters"],
+    gradient: "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
+    github: "#",
+    live: "#",
+    image:
+      "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1600&q=80",
+    gallery: [
+      "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1600&q=80",
+    ],
   },
 ];
 
@@ -794,7 +923,10 @@ export default function WorkPage() {
                   className={styles.slideNav}
                   onClick={() =>
                     setGalleryIndex((i) =>
-                      Math.min(i + 1, (selectedProject.gallery?.length ?? 1) - 1)
+                      Math.min(
+                        i + 1,
+                        (selectedProject.gallery?.length ?? 1) - 1
+                      )
                     )
                   }
                   aria-label="Next image"
@@ -803,21 +935,22 @@ export default function WorkPage() {
                 </button>
               </div>
 
-              {selectedProject.gallery && selectedProject.gallery.length > 1 && (
-                <div className={styles.modalThumbnails}>
-                  {selectedProject.gallery.map((g, idx) => (
-                    <img
-                      key={g}
-                      src={g}
-                      alt={`${selectedProject.title} ${idx + 1}`}
-                      className={`${styles.thumb} ${
-                        idx === galleryIndex ? styles.thumbActive : ""
-                      }`}
-                      onClick={() => setGalleryIndex(idx)}
-                    />
-                  ))}
-                </div>
-              )}
+              {selectedProject.gallery &&
+                selectedProject.gallery.length > 1 && (
+                  <div className={styles.modalThumbnails}>
+                    {selectedProject.gallery.map((g, idx) => (
+                      <img
+                        key={g}
+                        src={g}
+                        alt={`${selectedProject.title} ${idx + 1}`}
+                        className={`${styles.thumb} ${
+                          idx === galleryIndex ? styles.thumbActive : ""
+                        }`}
+                        onClick={() => setGalleryIndex(idx)}
+                      />
+                    ))}
+                  </div>
+                )}
             </div>
             <div className={styles.modalBody}>
               <span className={styles.modalCategory}>

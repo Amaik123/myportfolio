@@ -220,6 +220,13 @@ export default function Footer() {
             >
               Terms & Conditions
             </motion.a>
+            <span className={styles.divider}>•</span>
+            <motion.a
+              href="/resume"
+              whileHover={{ color: "#a855f7", scale: 1.05 }}
+            >
+              Resume
+            </motion.a>
           </div>
 
           <div className={styles.socialIcons}>

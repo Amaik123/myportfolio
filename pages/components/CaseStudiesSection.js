@@ -54,13 +54,13 @@ const projects = [
     tech: ["React", "Node.js", "TypeScript", "PostgreSQL", "Redis", "AWS"],
     gradient: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
     href: "#",
-    image:
-      "/YFT/yft-01.jpeg",
+    image: "/YFT/yft-54.jpeg",
   },
   {
     id: "yft-your-fitness-tracker",
     title: "YFT (Your Fitness Tracker)",
-    subtitle: "Personalized AI-driven daily briefings, workouts, and nutrition.",
+    subtitle:
+      "Personalized AI-driven daily briefings, workouts, and nutrition.",
     description:
       "A privacy-forward React Native (Expo) fitness app with Firebase auth and a Groq-based AI orchestration layer that delivers robust, context-aware daily briefings, smart caching, and resilient parsing to avoid UI crashes on malformed AI responses.",
     bulletPoints: [
@@ -68,11 +68,17 @@ const projects = [
       "Groq Responses API orchestration with token-bucket throttling, retries, and model rotation.",
       "Defensive parsing and UI hardening to handle malformed AI outputs safely.",
     ],
-    tech: ["React Native", "Expo", "TypeScript", "Firebase", "Groq", "AsyncStorage"],
+    tech: [
+      "React Native",
+      "Expo",
+      "TypeScript",
+      "Firebase",
+      "Groq",
+      "AsyncStorage",
+    ],
     gradient: "linear-gradient(135deg, #00c6ff 0%, #0072ff 100%)",
     href: "#",
-    image:
-      "https://images.unsplash.com/photo-1554284126-aa88f22d8a56?auto=format&fit=crop&w=1600&q=80",
+    image: "/YFT/yft-54.jpeg",
   },
 ];
 
